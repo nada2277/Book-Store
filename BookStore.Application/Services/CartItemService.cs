@@ -13,6 +13,11 @@ namespace BookStore.Application.Services
   {
     ICartItemRepository _CartItemRepository { get; set; }
 
+    public CartItemService(ICartItemRepository cartItemRepository)
+    {
+      _CartItemRepository = cartItemRepository;
+    }
+
     public bool AddCartItem(CartItem CartItem)
     {
       bool isAdded = _CartItemRepository.Create(CartItem);

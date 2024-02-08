@@ -2,15 +2,11 @@
 
 namespace BookStore.Application.Services
 {
-  public interface IOrderService
+    public interface IOrderService
   {
     bool AddOrder(Order order);
-    List<Order> GetCustomerOrders();
     Order GetOrderById(int id);
-    bool ChangeOrderStutus (Order order);
-
-
-
+    void ChangeOrderStutus (int orderId,OrderStatus status);
 
   }
 }

@@ -14,6 +14,8 @@ namespace BookStore.Application.Services
   {
     IBookCategoryRepository _BookCategoryRepository { get; set; }
 
+    public BookCategoryService(IBookCategoryRepository bookCategoryService)=>
+      _BookCategoryRepository= bookCategoryService;
     public bool AddBookCategory(BookCategory BookCategory)
     {
       bool isAdded = _BookCategoryRepository.Create(BookCategory);
@@ -37,5 +39,8 @@ namespace BookStore.Application.Services
         _BookCategoryRepository.Save();
       return isUpdated;
     }
+
+    public List<Book> GetAllBookByCategory(int id)=>_BookCategoryRepository.GetBooksByCategory(id);
+    
   }
 }

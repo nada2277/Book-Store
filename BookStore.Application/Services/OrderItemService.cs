@@ -14,6 +14,10 @@ namespace BookStore.Application.Services
   public class OrderItemService : IOrderItemService
   {
     IOrderItemRepository _OrderItemRepository { get; set; }
+    public OrderItemService(IOrderItemRepository orderItemRepository)=>
+      _OrderItemRepository = orderItemRepository;
+    
+
     public bool AddItem(OrderItem item)
     {
       bool isAdded = _OrderItemRepository.Create(item);

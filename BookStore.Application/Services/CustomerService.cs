@@ -13,59 +13,52 @@ namespace BookStore.Application.Services
   {
     ICustomerRepository _CustomerRepository { get; set; }
 
+    public CustomerService(ICustomerRepository customerRepository)=>
+      _CustomerRepository = customerRepository;
+    
+
     public bool AddCustomer(Customer Customer)
     {
-      throw new NotImplementedException();
+      bool isAdded = _CustomerRepository.Create(Customer);
+      if (isAdded)
+        _CustomerRepository.Save();
+      return isAdded;
     }
-
-    public void AddToCart(Book book, Customer customer, int quantity)
-    {
-      throw new NotImplementedException();
-    }
-
     public bool DeleteCustomer(int id)
     {
-      throw new NotImplementedException();
+
+      bool isDeleted = _CustomerRepository.Delete(id);
+      if (isDeleted)
+        _CustomerRepository.Save();
+      return isDeleted;
     }
 
-    public List<Customer> GetAllCustomer()
-    {
-      throw new NotImplementedException();
-    }
-
-    public Customer GetbyId(int id)
-    {
-      throw new NotImplementedException();
-    }
-
-    public bool IsLogin(string username, string password)
-    {
-      throw new NotImplementedException();
-    }
-
-    public bool IsUsrEmailExisit(int usrEmail)
-    {
-      throw new NotImplementedException();
-    }
-
-    public bool IsUsrNameExisit(string usrName)
-    {
-      throw new NotImplementedException();
-    }
-
-    public bool IsUsrPhoneExisit(string phone)
-    {
-      throw new NotImplementedException();
-    }
-
-    public List<Order> ShowOrders(int customerId)
-    {
-      throw new NotImplementedException();
-    }
+    public List<Customer> GetAllPagination(int num, int pageIndex) =>
+      _CustomerRepository.GetAll().Skip(num * pageIndex - 1).Take(num).ToList();
+    public Customer GetbyId(int id) => _CustomerRepository.GetById(id);
 
     public bool UpdateCustomer(Customer Customer)
     {
-      throw new NotImplementedException();
+      bool isUpdated = _CustomerRepository.Update(Customer);
+      if (isUpdated)
+        _CustomerRepository.Save();
+      return isUpdated;
+
     }
+    public bool IsLogin(string username, string password)=>
+      _CustomerRepository.GetAll().Any(Cust => (Cust.UserName == username&&Cust.Password==password));
+
+    public bool IsUsrEmailExisit(string usrEmail)=>
+       _CustomerRepository.GetAll().Any(Cust => Cust.Email == usrEmail);
+
+    public bool IsUsrNameExisit(string usrName) =>
+      _CustomerRepository.GetAll().Any(Cust => Cust.UserName == usrName);
+
+    public bool IsUsrPhoneExisit(string phone) =>
+      _CustomerRepository.GetAll().Any(Cust => Cust.Phone == phone);
+    public List<Order> ShowOrders(int CustomerId)=>
+     _CustomerRepository.GetCustomerOrders(CustomerId);
+    public void AddToCart(int bookId, int customerId, int quantity)=>
+      _CustomerRepository.AddCartItem(bookId, customerId, quantity); 
   }
 }

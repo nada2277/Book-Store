@@ -9,28 +9,25 @@ using System.Threading.Tasks;
 
 namespace BookStore.Application.Services
 {
-  public class OrderService : IOrderService
+    public class OrderService : IOrderService
   {
     IOrederRepository _OrderRepository { get; set; }
 
+    public OrderService(IOrederRepository orderRepository) => _OrderRepository = orderRepository;
     public bool AddOrder(Order order)
     {
-      throw new NotImplementedException();
+      bool isAdded = _OrderRepository.Create(order);
+      if (isAdded)
+        _OrderRepository.Save();
+      return isAdded;
     }
 
-    public bool ChangeOrderStutus(Order order)
-    {
-      throw new NotImplementedException();
-    }
+    public void ChangeOrderStutus(int orderId, OrderStatus status)=>
+      _OrderRepository.GetById(orderId).Status=status.ToString();
+    
 
-    public List<Order> GetCustomerOrders()
-    {
-      throw new NotImplementedException();
-    }
-
-    public Order GetOrderById(int id)
-    {
-      throw new NotImplementedException();
-    }
+    public Order GetOrderById(int id)=>_OrderRepository.GetById(id);
+    
+    
   }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookStore.Application.Contracts
 {
-  public interface IOrederRepository : IRepository<Order, int>
+    public interface IOrederRepository : IRepository<Order, int>
   {
     bool ChangeStatus(OrderStatus status);
 

@@ -13,6 +13,8 @@ namespace BookStore.Application.Services
   {
     ICategoryRepository _CategoryRepository { get; set; }
 
+    public CategoryService(ICategoryRepository categoryRepository)=>
+      _CategoryRepository = categoryRepository;
     public bool AddCategory(Category Category)
     {
       bool isAdded = _CategoryRepository.Create(Category);
@@ -27,7 +29,7 @@ namespace BookStore.Application.Services
         _CategoryRepository.Save();
       return isDeleted;
     }
-    public List<Category> GetAllCategories()=> _CategoryRepository.GetAll().ToList();
+    public List<Category> GetAllCategories() => _CategoryRepository.GetAll().ToList();
     public Category GetbyId(int id) => _CategoryRepository.GetById(id);
     public bool UpdateCategory(Category Category)
     {
