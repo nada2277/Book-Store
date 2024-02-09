@@ -19,11 +19,15 @@ namespace BookStore.Models
         public string Password { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
+
+
+
         //Customer-Order one to many
-        public List<Order> Orders { get; set; }
+        public List<Order>? Orders { get; set; }
+
 
         //Customer-Book many to many
-        public List<CartItem> CartItems { get; set; }
+        public List<CartItem>? CartItems { get; set; }
 
 
 

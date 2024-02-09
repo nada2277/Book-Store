@@ -12,7 +12,7 @@ namespace BookStore.Application
         Confirm,
         Shipped,
         Delivered,
-        Caneled,
+        Canceled,
         Return
     }
 }

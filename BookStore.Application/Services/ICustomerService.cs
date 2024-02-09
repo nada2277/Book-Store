@@ -6,7 +6,7 @@ namespace BookStore.Application.Services
   {
     bool AddCustomer(Customer Customer);
     bool UpdateCustomer(Customer Customer);
-    bool DeleteCustomer(int id);
+    bool DeleteCustomer(Customer Customer);
     Customer GetbyId(int id);
     List<Customer> GetAllPagination(int num, int pageIndex);
     bool IsUsrNameExisit(string usrName);

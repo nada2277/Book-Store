@@ -25,9 +25,9 @@ namespace BookStore.Application.Services
         _OrderItemRepository.Save();
       return isAdded;
     }
-    public bool DeleteItem(int id)
+    public bool DeleteItem(OrderItem item)
     {
-      bool isDeleted = _OrderItemRepository.Delete(id);
+      bool isDeleted = _OrderItemRepository.Delete(item);
       if (isDeleted)
         _OrderItemRepository.Save();
       return isDeleted;

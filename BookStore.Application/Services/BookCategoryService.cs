@@ -24,9 +24,9 @@ namespace BookStore.Application.Services
       return isAdded;
     }
 
-    public bool DeleteBookCategory(int id)
+    public bool DeleteBookCategory(BookCategory BookCategory)
     {
-      bool isDeleted = _BookCategoryRepository.Delete(id);
+      bool isDeleted = _BookCategoryRepository.Delete(BookCategory);
       if (isDeleted)
         _BookCategoryRepository.Save();
       return isDeleted;
@@ -40,7 +40,7 @@ namespace BookStore.Application.Services
       return isUpdated;
     }
 
-    public List<Book> GetAllBookByCategory(int id)=>_BookCategoryRepository.GetBooksByCategory(id);
+    //public List<Book> GetAllBookByCategory(int id)=>_BookCategoryRepository.GetBooksByCategory(id);
     
   }
 }

@@ -14,10 +14,14 @@ namespace BookStore.Models
         [Key]
         public int Id { get; set; }
         public int OrderID { get; set; }
-        public Order Order { get; set; }
 
         public int BookID { get; set; }
-        public Book Book { get; set; }
         public int Quantity { get; set; }
+
+
+        public Book? Book { get; set; }
+
+        public Order? Order { get; set; }
+
     }
 }

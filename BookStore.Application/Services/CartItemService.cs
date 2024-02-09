@@ -33,9 +33,9 @@ namespace BookStore.Application.Services
       return isUpdated;
     }
 
-    public bool DeleteCartItem(int id)
+    public bool DeleteCartItem(CartItem CartItem)
     {
-      bool isDeleted = _CartItemRepository.Delete(id);
+      bool isDeleted = _CartItemRepository.Delete(CartItem);
       if (isDeleted)
         _CartItemRepository.Save();
       return isDeleted;

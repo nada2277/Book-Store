@@ -13,8 +13,10 @@ namespace BookStore.Models
 
         public int Id { get; set; } 
         public string Name { get; set; }
+
+
         //Book-Category many to many
-        public List<BookCategory> BookCategories { get; set; }
+        public List<BookCategory>? BookCategories { get; set; }
 
 
     }

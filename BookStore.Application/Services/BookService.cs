@@ -15,11 +15,21 @@ namespace BookStore.Application.Services
     public BookService(IBookRepository bookRepository) =>
      _BookRepository = bookRepository;
 
-    public List<Book> GetAllPagination(int num, int pageIndex) =>
-      _BookRepository.GetAll().Skip(num * pageIndex - 1).Take(num).ToList(); 
-    public List<Book> GetBooksByName(string name) =>
+
+        //public List<Book> GetAllPagination(int num, int pageIndex) =>
+        //  _BookRepository.GetAll().Skip(num * pageIndex - 1).Take(num).ToList();
+
+        public List<Book> GetAllPagination(int num, int pageIndex) =>
+      _BookRepository.GetAll().Skip(num * pageIndex).Take(pageIndex).ToList();
+
+
+        public List<Book> GetBooksByName(string name) =>
       _BookRepository.GetAll().Where(b=>b.Name.Contains(name)).ToList();
+
+
     public Book GetBookById(int id) => _BookRepository.GetById(id);
+
+
     public bool AddBook(Book book)
     {
       bool isAdded = _BookRepository.Create(book);
@@ -27,9 +37,11 @@ namespace BookStore.Application.Services
         _BookRepository.Save();
       return isAdded;
     }
-    public bool DeleteBook(int id)
+
+
+    public bool DeleteBook(Book book)
     {
-      bool isDeleted = _BookRepository.Delete(id);
+      bool isDeleted = _BookRepository.Delete(book);
       if (isDeleted)
         _BookRepository.Save();
       return isDeleted;

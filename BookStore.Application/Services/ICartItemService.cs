@@ -6,7 +6,7 @@ namespace BookStore.Application.Services
   {
     bool AddCartItem(CartItem CartItem);
     bool UpdateCartItem(CartItem CartItem);
-    bool DeleteCartItem(int id);
+    bool DeleteCartItem(CartItem CartItem);
     bool ChangeItemQuantity(CartItem CartItem,int quantity);
 
   }

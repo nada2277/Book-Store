@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace BookStore.Application.Contracts
 {
-  public interface IRepository<T,TId>
-  {
-    IQueryable<T> GetAll();
-    T GetById(TId id);
+    public interface IRepository<T, TId>
+    {
+        IQueryable<T> GetAll();
+        T GetById(TId id);
 
-    bool Create(T entity);
-    bool Update(T entity);
-    bool Delete(TId id);
-    int Save();
-  }
+        bool Create(T entity);
+        bool Update(T entity);
+        bool Delete(T entity);
+        int Save();
+    }
 }

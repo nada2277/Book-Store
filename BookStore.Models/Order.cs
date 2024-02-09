@@ -16,13 +16,16 @@ namespace BookStore.Models
         public double TotalPrice { get; set; }
         public DateTime OrderedAt { get; set; }
         public DateTime ArrivedOn { get; set; }
+
+
         //Customer-Order one to many
         public int CustomerID { get; set; }
 
-        public Customer Customer { get; set; }
-        //Book-Order many to many
+        public Customer? Customer { get; set; }
 
-        public List<OrderItem> OrderItems { get; set; }
+
+        //Book-Order many to many
+        public List<OrderItem>? OrderItems { get; set; }
 
 
     }

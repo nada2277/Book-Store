@@ -24,17 +24,18 @@ namespace BookStore.Application.Services
         _CustomerRepository.Save();
       return isAdded;
     }
-    public bool DeleteCustomer(int id)
+    public bool DeleteCustomer(Customer Customer)
     {
 
-      bool isDeleted = _CustomerRepository.Delete(id);
+      bool isDeleted = _CustomerRepository.Delete(Customer);
       if (isDeleted)
         _CustomerRepository.Save();
       return isDeleted;
     }
 
+        //Recorrect
     public List<Customer> GetAllPagination(int num, int pageIndex) =>
-      _CustomerRepository.GetAll().Skip(num * pageIndex - 1).Take(num).ToList();
+      _CustomerRepository.GetAll().Skip(num * pageIndex ).Take(pageIndex).ToList();
     public Customer GetbyId(int id) => _CustomerRepository.GetById(id);
 
     public bool UpdateCustomer(Customer Customer)
