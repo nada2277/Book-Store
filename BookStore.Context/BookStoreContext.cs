@@ -23,7 +23,7 @@ namespace BookStore.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=DESKTOP-KKAM6IO;Initial Catalog=BookStore;Integrated Security=True;TrustServerCertificate=True");
+            optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=BookStore;Integrated Security=True;TrustServerCertificate=True");
 
         }
 

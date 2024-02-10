@@ -13,18 +13,14 @@ namespace BookStore.Application.Services
   {
     IBookRepository _BookRepository { get; set; }
     public BookService(IBookRepository bookRepository) =>
-     _BookRepository = bookRepository;
+      _BookRepository = bookRepository;
+
+    public List<Book> GetAllPagination(int num, int pageIndex) =>
+      _BookRepository.GetAll().Skip(num * (pageIndex - 1)).Take(num).ToList();
 
 
-        //public List<Book> GetAllPagination(int num, int pageIndex) =>
-        //  _BookRepository.GetAll().Skip(num * pageIndex - 1).Take(num).ToList();
-
-        public List<Book> GetAllPagination(int num, int pageIndex) =>
-      _BookRepository.GetAll().Skip(num * pageIndex).Take(pageIndex).ToList();
-
-
-        public List<Book> GetBooksByName(string name) =>
-      _BookRepository.GetAll().Where(b=>b.Name.Contains(name)).ToList();
+    public List<Book> GetBooksByName(string name) =>
+      _BookRepository.GetAll().Where(b => b.Name.Contains(name)).ToList();
 
 
     public Book GetBookById(int id) => _BookRepository.GetById(id);
@@ -55,7 +51,8 @@ namespace BookStore.Application.Services
 
     }
     public List<Book> GetByCategoryName(string name) =>
-      _BookRepository.GetByCategory(name).ToList();
+     _BookRepository.GetByCategory(name).ToList();
+
 
   }
 }

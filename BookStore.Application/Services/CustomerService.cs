@@ -35,7 +35,7 @@ namespace BookStore.Application.Services
 
         //Recorrect
     public List<Customer> GetAllPagination(int num, int pageIndex) =>
-      _CustomerRepository.GetAll().Skip(num * pageIndex ).Take(pageIndex).ToList();
+      _CustomerRepository.GetAll().Skip(num * (pageIndex-1) ).Take(num).ToList();
     public Customer GetbyId(int id) => _CustomerRepository.GetById(id);
 
     public bool UpdateCustomer(Customer Customer)
@@ -58,8 +58,13 @@ namespace BookStore.Application.Services
     public bool IsUsrPhoneExisit(string phone) =>
       _CustomerRepository.GetAll().Any(Cust => Cust.Phone == phone);
     public List<Order> ShowOrders(int CustomerId)=>
-     _CustomerRepository.GetCustomerOrders(CustomerId);
+     _CustomerRepository.GetCustomerOrders(CustomerId).ToList();
     public void AddToCart(int bookId, int customerId, int quantity)=>
-      _CustomerRepository.AddCartItem(bookId, customerId, quantity); 
+      _CustomerRepository.AddCartItem(bookId, customerId, quantity);
+
+    public List<CartItem> GetCartByCustomerId(int id)=>
+         _CustomerRepository.GetCustomerCart(id).ToList();
+
+   
   }
 }

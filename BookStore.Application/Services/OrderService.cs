@@ -27,7 +27,8 @@ namespace BookStore.Application.Services
     
 
     public Order GetOrderById(int id)=>_OrderRepository.GetById(id);
-    
-    
+
+    public List<Order> GetAllPagination(int num, int pageIndex)
+      => _OrderRepository.GetAll().Skip(num * (pageIndex - 1)).Take(num).ToList();
   }
 }

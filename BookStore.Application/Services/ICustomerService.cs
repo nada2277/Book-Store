@@ -15,5 +15,6 @@ namespace BookStore.Application.Services
     bool IsLogin(string username, string password);
     void AddToCart(int bookId, int customerId, int quantity);
     List<Order> ShowOrders(int customerId);
+    List<CartItem> GetCartByCustomerId(int id);
   }
 }
