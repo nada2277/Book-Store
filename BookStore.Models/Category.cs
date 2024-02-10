@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Onion.Models
+namespace BookStore.Models
 {
     public class Category
     {
@@ -13,8 +13,10 @@ namespace Onion.Models
 
         public int Id { get; set; } 
         public string Name { get; set; }
+
+
         //Book-Category many to many
-        public List<BookCategory> BookCategories { get; set; }
+        public List<BookCategory>? BookCategories { get; set; }
 
 
     }

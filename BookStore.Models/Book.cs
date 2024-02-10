@@ -5,24 +5,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Onion.Models
+namespace BookStore.Models
 {
     public class Book
     {
-        [Key]
 
+        [Key]
         public int Id { get; set; }
         public string Name { get; set; }
         public int Stock { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }
-        //Book-Order many to many
 
-        public List<BookOrder> BookOrders { get; set; }
+
+
+        //Book-Order many to many
+        public List<OrderItem>? OrderItems { get; set; }
+
+
         //Customer-Book many to many
-        public List<CustomerBook> CustomerBooks { get; set; }
+        public List<CartItem>? CartItems { get; set; }
+
+
         //Book-Category many to many
-        public List<BookCategory> BookCategories { get; set; }
+        public List<BookCategory>? BookCategories { get; set; }
 
 
     }
