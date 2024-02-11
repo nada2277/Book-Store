@@ -73,9 +73,9 @@ internal class Program
       Console.WriteLine("---------------------------");
     }
 
-    //var orsers = OrderService.GetAllPagination(10,1);
-    //foreach (var item in orsers)
-    //  Console.WriteLine($"\nStudent Name From GetAllPagination: {item.Status}");
+    var orsers = OrderService.GetAllPagination(10, 1);
+    foreach (var item in orsers)
+      Console.WriteLine($"\nStudent Name From GetAllPagination: {item.Status}");
 
   }
 }
