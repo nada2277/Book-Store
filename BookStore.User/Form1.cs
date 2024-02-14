@@ -19,7 +19,7 @@ namespace BookStore.User
 
     public void ShowUserForm(Customer customer)
     {
-      homeForm = new HomeForm(customer);
+      homeForm = new HomeForm(customer,this);
       homeForm.TopLevel = false;
       homeForm.FormBorderStyle = FormBorderStyle.None;
       homeForm.Dock = DockStyle.Fill;

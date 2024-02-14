@@ -30,6 +30,7 @@
     {
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HomeForm));
       panelMenu = new Panel();
+      button6 = new Button();
       button5 = new Button();
       button4 = new Button();
       button3 = new Button();
@@ -38,6 +39,7 @@
       panelLogo = new Panel();
       label1 = new Label();
       HeaderPanel = new Panel();
+      pictureBox4 = new PictureBox();
       pictureBox3 = new PictureBox();
       pictureBox1 = new PictureBox();
       searchPanel = new Panel();
@@ -51,6 +53,7 @@
       panelMenu.SuspendLayout();
       panelLogo.SuspendLayout();
       HeaderPanel.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
       ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
       ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
       searchPanel.SuspendLayout();
@@ -62,6 +65,7 @@
       // panelMenu
       // 
       panelMenu.BackColor = Color.FromArgb(82, 109, 130);
+      panelMenu.Controls.Add(button6);
       panelMenu.Controls.Add(button5);
       panelMenu.Controls.Add(button4);
       panelMenu.Controls.Add(button3);
@@ -71,8 +75,28 @@
       panelMenu.Dock = DockStyle.Left;
       panelMenu.Location = new Point(0, 0);
       panelMenu.Name = "panelMenu";
-      panelMenu.Size = new Size(311, 782);
+      panelMenu.Size = new Size(311, 914);
       panelMenu.TabIndex = 0;
+      // 
+      // button6
+      // 
+      button6.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+      button6.BackgroundImageLayout = ImageLayout.Center;
+      button6.Cursor = Cursors.Hand;
+      button6.FlatAppearance.BorderSize = 0;
+      button6.FlatStyle = FlatStyle.Flat;
+      button6.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+      button6.ForeColor = Color.FromArgb(238, 238, 238);
+      button6.Image = (Image)resources.GetObject("button6.Image");
+      button6.ImageAlign = ContentAlignment.MiddleLeft;
+      button6.Location = new Point(0, 747);
+      button6.Name = "button6";
+      button6.Padding = new Padding(10, 0, 0, 0);
+      button6.Size = new Size(311, 100);
+      button6.TabIndex = 5;
+      button6.Text = "    Log Out";
+      button6.UseVisualStyleBackColor = true;
+      button6.Click += button6_Click;
       // 
       // button5
       // 
@@ -91,6 +115,7 @@
       button5.TabIndex = 4;
       button5.Text = "    Setting";
       button5.UseVisualStyleBackColor = true;
+      button5.Click += button5_Click;
       // 
       // button4
       // 
@@ -193,6 +218,7 @@
       // HeaderPanel
       // 
       HeaderPanel.BackColor = Color.White;
+      HeaderPanel.Controls.Add(pictureBox4);
       HeaderPanel.Controls.Add(pictureBox3);
       HeaderPanel.Controls.Add(pictureBox1);
       HeaderPanel.Controls.Add(searchPanel);
@@ -203,27 +229,44 @@
       HeaderPanel.Size = new Size(1035, 144);
       HeaderPanel.TabIndex = 1;
       // 
+      // pictureBox4
+      // 
+      pictureBox4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+      pictureBox4.Cursor = Cursors.Hand;
+      pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
+      pictureBox4.Location = new Point(828, 61);
+      pictureBox4.Name = "pictureBox4";
+      pictureBox4.Size = new Size(33, 29);
+      pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
+      pictureBox4.TabIndex = 4;
+      pictureBox4.TabStop = false;
+      pictureBox4.Click += pictureBox4_Click;
+      // 
       // pictureBox3
       // 
       pictureBox3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+      pictureBox3.Cursor = Cursors.Hand;
       pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-      pictureBox3.Location = new Point(824, 61);
+      pictureBox3.Location = new Point(789, 61);
       pictureBox3.Name = "pictureBox3";
       pictureBox3.Size = new Size(33, 29);
       pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
       pictureBox3.TabIndex = 2;
       pictureBox3.TabStop = false;
+      pictureBox3.Click += pictureBox3_Click;
       // 
       // pictureBox1
       // 
       pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
       pictureBox1.BackColor = Color.Gainsboro;
+      pictureBox1.Cursor = Cursors.Hand;
       pictureBox1.Location = new Point(869, 19);
       pictureBox1.Name = "pictureBox1";
       pictureBox1.Size = new Size(133, 119);
       pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
       pictureBox1.TabIndex = 3;
       pictureBox1.TabStop = false;
+      pictureBox1.Click += pictureBox1_Click;
       // 
       // searchPanel
       // 
@@ -263,10 +306,10 @@
       fnameLabel.AutoSize = true;
       fnameLabel.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
       fnameLabel.Location = new Point(483, 48);
-      fnameLabel.MinimumSize = new Size(335, 45);
+      fnameLabel.MinimumSize = new Size(300, 45);
       fnameLabel.Name = "fnameLabel";
       fnameLabel.RightToLeft = RightToLeft.Yes;
-      fnameLabel.Size = new Size(335, 45);
+      fnameLabel.Size = new Size(300, 45);
       fnameLabel.TabIndex = 1;
       fnameLabel.TextAlign = ContentAlignment.MiddleLeft;
       // 
@@ -276,16 +319,16 @@
       DesktopPanel.Dock = DockStyle.Fill;
       DesktopPanel.Location = new Point(311, 144);
       DesktopPanel.Name = "DesktopPanel";
-      DesktopPanel.Size = new Size(1035, 638);
+      DesktopPanel.Size = new Size(1035, 770);
       DesktopPanel.TabIndex = 2;
       // 
       // panel1
       // 
-      panel1.BackColor = Color.Transparent;
+      panel1.BackColor = Color.White;
       panel1.Controls.Add(nextBtn);
       panel1.Controls.Add(prevBtn);
       panel1.Dock = DockStyle.Bottom;
-      panel1.Location = new Point(0, 567);
+      panel1.Location = new Point(0, 699);
       panel1.Name = "panel1";
       panel1.Size = new Size(1035, 71);
       panel1.TabIndex = 0;
@@ -325,7 +368,7 @@
       // 
       AutoScaleDimensions = new SizeF(10F, 25F);
       AutoScaleMode = AutoScaleMode.Font;
-      ClientSize = new Size(1346, 782);
+      ClientSize = new Size(1346, 914);
       Controls.Add(DesktopPanel);
       Controls.Add(HeaderPanel);
       Controls.Add(panelMenu);
@@ -336,6 +379,7 @@
       panelLogo.PerformLayout();
       HeaderPanel.ResumeLayout(false);
       HeaderPanel.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
       ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
       ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
       searchPanel.ResumeLayout(false);
@@ -367,5 +411,7 @@
     private PictureBox pictureBox2;
     private PictureBox pictureBox3;
     private Button nextBtn;
+    private Button button6;
+    private PictureBox pictureBox4;
   }
 }

@@ -24,7 +24,7 @@ namespace BookStore.User.Forms
       {
         var bookControl = new BookControl(id);
         bookControl.BookName = book.Name;
-        bookControl.BookPrice = book.Price.ToString();
+        bookControl.BookPrice = book.Price.ToString() +" LE";
         bookControl.BookImage = Image.FromFile(Path.GetFullPath($"..\\..\\..\\Images\\{book.BookImg}"));
         bookControl.id = book.Id;
         //Bitmap b = new Bitmap(book.BookImage);
