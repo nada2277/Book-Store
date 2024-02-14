@@ -46,8 +46,8 @@ namespace BookStore.Application.Services
       return isUpdated;
 
     }
-    public bool IsLogin(string username, string password)=>
-      _CustomerRepository.GetAll().Any(Cust => (Cust.UserName == username&&Cust.Password==password));
+    public Customer IsLogin(string username, string password)=>
+      _CustomerRepository.GetAll().FirstOrDefault(Cust => (Cust.UserName == username&&Cust.Password==password));
 
     public bool IsUsrEmailExisit(string usrEmail)=>
        _CustomerRepository.GetAll().Any(Cust => Cust.Email == usrEmail);

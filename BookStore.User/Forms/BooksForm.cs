@@ -1,4 +1,5 @@
-﻿using BookStore.User.Forms;
+﻿using BookStore.Models;
+using BookStore.User.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,23 +15,23 @@ namespace BookStore.User.Forms
 {
   public partial class BooksForm : Form
   {
-    List<BookControl> books = new();
 
-    public BooksForm()
+    public BooksForm(List<Book> books,int id)
     {
       InitializeComponent();
-      for (int i = 0; i < 8; i++)
+      Random random = new Random();
+      foreach (var book in books)
       {
-        var book = new BookControl();
-        book.BookName = "BookTitle";
-        book.BookPrice = "Price $";
-        book.BookImage = Image.FromFile(@"C:\Users\Mohamed\Desktop\User\User\bin\Images\book2.jpg");
+        var bookControl = new BookControl(id);
+        bookControl.BookName = book.Name;
+        bookControl.BookPrice = book.Price.ToString();
+        bookControl.BookImage = Image.FromFile(Path.GetFullPath($"..\\..\\..\\Images\\{book.BookImg}"));
+        bookControl.id = book.Id;
         //Bitmap b = new Bitmap(book.BookImage);
         //book.BookImage = ResizeImage(b, new Size(600, 450));
-        books.Add(book);
+        flowLayoutPanel1.Controls.Add(bookControl);
       }
-      foreach (var book in books)
-        flowLayoutPanel1.Controls.Add(book);
+ 
 
     }
 

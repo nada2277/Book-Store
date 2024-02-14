@@ -40,21 +40,20 @@
       HeaderPanel = new Panel();
       pictureBox3 = new PictureBox();
       pictureBox1 = new PictureBox();
-      panel2 = new Panel();
+      searchPanel = new Panel();
       pictureBox2 = new PictureBox();
       textBox1 = new TextBox();
-      label2 = new Label();
+      fnameLabel = new Label();
       DesktopPanel = new Panel();
       panel1 = new Panel();
-      button8 = new Button();
-      button7 = new Button();
-      button6 = new Button();
+      nextBtn = new Button();
+      prevBtn = new Button();
       panelMenu.SuspendLayout();
       panelLogo.SuspendLayout();
       HeaderPanel.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
       ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-      panel2.SuspendLayout();
+      searchPanel.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
       DesktopPanel.SuspendLayout();
       panel1.SuspendLayout();
@@ -196,8 +195,8 @@
       HeaderPanel.BackColor = Color.White;
       HeaderPanel.Controls.Add(pictureBox3);
       HeaderPanel.Controls.Add(pictureBox1);
-      HeaderPanel.Controls.Add(panel2);
-      HeaderPanel.Controls.Add(label2);
+      HeaderPanel.Controls.Add(searchPanel);
+      HeaderPanel.Controls.Add(fnameLabel);
       HeaderPanel.Dock = DockStyle.Top;
       HeaderPanel.Location = new Point(311, 0);
       HeaderPanel.Name = "HeaderPanel";
@@ -208,7 +207,7 @@
       // 
       pictureBox3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
       pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-      pictureBox3.Location = new Point(851, 60);
+      pictureBox3.Location = new Point(824, 61);
       pictureBox3.Name = "pictureBox3";
       pictureBox3.Size = new Size(33, 29);
       pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -218,30 +217,29 @@
       // pictureBox1
       // 
       pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-      pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-      pictureBox1.Location = new Point(890, 19);
+      pictureBox1.BackColor = Color.Gainsboro;
+      pictureBox1.Location = new Point(869, 19);
       pictureBox1.Name = "pictureBox1";
       pictureBox1.Size = new Size(133, 119);
       pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
       pictureBox1.TabIndex = 3;
       pictureBox1.TabStop = false;
       // 
-      // panel2
+      // searchPanel
       // 
-      panel2.BackColor = Color.White;
-      panel2.BorderStyle = BorderStyle.Fixed3D;
-      panel2.Controls.Add(pictureBox2);
-      panel2.Controls.Add(textBox1);
-      panel2.Location = new Point(77, 56);
-      panel2.Name = "panel2";
-      panel2.Size = new Size(385, 46);
-      panel2.TabIndex = 2;
+      searchPanel.BackColor = Color.FromArgb(221, 230, 237);
+      searchPanel.Controls.Add(pictureBox2);
+      searchPanel.Controls.Add(textBox1);
+      searchPanel.Location = new Point(71, 50);
+      searchPanel.Name = "searchPanel";
+      searchPanel.Size = new Size(391, 52);
+      searchPanel.TabIndex = 2;
       // 
       // pictureBox2
       // 
       pictureBox2.Cursor = Cursors.Hand;
       pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-      pictureBox2.Location = new Point(341, 8);
+      pictureBox2.Location = new Point(334, 11);
       pictureBox2.Name = "pictureBox2";
       pictureBox2.Size = new Size(33, 29);
       pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -250,23 +248,27 @@
       // 
       // textBox1
       // 
-      textBox1.BackColor = Color.White;
+      textBox1.BackColor = Color.FromArgb(221, 230, 237);
       textBox1.BorderStyle = BorderStyle.None;
-      textBox1.Location = new Point(13, 8);
+      textBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      textBox1.ForeColor = Color.FromArgb(39, 55, 77);
+      textBox1.Location = new Point(27, 8);
       textBox1.Name = "textBox1";
-      textBox1.Size = new Size(293, 24);
+      textBox1.Size = new Size(301, 32);
       textBox1.TabIndex = 0;
       // 
-      // label2
+      // fnameLabel
       // 
-      label2.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-      label2.AutoSize = true;
-      label2.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
-      label2.Location = new Point(640, 49);
-      label2.Name = "label2";
-      label2.Size = new Size(208, 45);
-      label2.TabIndex = 1;
-      label2.Text = "Hello Fname";
+      fnameLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+      fnameLabel.AutoSize = true;
+      fnameLabel.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
+      fnameLabel.Location = new Point(483, 48);
+      fnameLabel.MinimumSize = new Size(335, 45);
+      fnameLabel.Name = "fnameLabel";
+      fnameLabel.RightToLeft = RightToLeft.Yes;
+      fnameLabel.Size = new Size(335, 45);
+      fnameLabel.TabIndex = 1;
+      fnameLabel.TextAlign = ContentAlignment.MiddleLeft;
       // 
       // DesktopPanel
       // 
@@ -279,44 +281,45 @@
       // 
       // panel1
       // 
-      panel1.BackColor = Color.White;
-      panel1.Controls.Add(button8);
-      panel1.Controls.Add(button7);
-      panel1.Controls.Add(button6);
+      panel1.BackColor = Color.Transparent;
+      panel1.Controls.Add(nextBtn);
+      panel1.Controls.Add(prevBtn);
       panel1.Dock = DockStyle.Bottom;
-      panel1.Location = new Point(0, 584);
+      panel1.Location = new Point(0, 567);
       panel1.Name = "panel1";
-      panel1.Size = new Size(1035, 54);
+      panel1.Size = new Size(1035, 71);
       panel1.TabIndex = 0;
       // 
-      // button8
+      // nextBtn
       // 
-      button8.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-      button8.Location = new Point(890, 8);
-      button8.Name = "button8";
-      button8.Size = new Size(112, 34);
-      button8.TabIndex = 2;
-      button8.Text = "Next";
-      button8.UseVisualStyleBackColor = true;
+      nextBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+      nextBtn.BackColor = Color.Transparent;
+      nextBtn.BackgroundImage = (Image)resources.GetObject("nextBtn.BackgroundImage");
+      nextBtn.BackgroundImageLayout = ImageLayout.Zoom;
+      nextBtn.Cursor = Cursors.Hand;
+      nextBtn.FlatAppearance.BorderSize = 0;
+      nextBtn.FlatStyle = FlatStyle.Flat;
+      nextBtn.Location = new Point(937, 9);
+      nextBtn.Name = "nextBtn";
+      nextBtn.Size = new Size(54, 50);
+      nextBtn.TabIndex = 2;
+      nextBtn.UseVisualStyleBackColor = false;
+      nextBtn.Click += nextBtn_Click;
       // 
-      // button7
+      // prevBtn
       // 
-      button7.Location = new Point(37, 8);
-      button7.Name = "button7";
-      button7.Size = new Size(112, 34);
-      button7.TabIndex = 1;
-      button7.Text = "Previous";
-      button7.UseVisualStyleBackColor = true;
-      // 
-      // button6
-      // 
-      button6.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-      button6.Location = new Point(905, -40);
-      button6.Name = "button6";
-      button6.Size = new Size(112, 34);
-      button6.TabIndex = 0;
-      button6.Text = "button6";
-      button6.UseVisualStyleBackColor = true;
+      prevBtn.BackColor = Color.Transparent;
+      prevBtn.BackgroundImage = (Image)resources.GetObject("prevBtn.BackgroundImage");
+      prevBtn.BackgroundImageLayout = ImageLayout.Zoom;
+      prevBtn.Cursor = Cursors.Hand;
+      prevBtn.FlatAppearance.BorderSize = 0;
+      prevBtn.FlatStyle = FlatStyle.Flat;
+      prevBtn.Location = new Point(35, 9);
+      prevBtn.Name = "prevBtn";
+      prevBtn.Size = new Size(52, 48);
+      prevBtn.TabIndex = 1;
+      prevBtn.UseVisualStyleBackColor = false;
+      prevBtn.Click += prevBtn_Click;
       // 
       // HomeForm
       // 
@@ -335,8 +338,8 @@
       HeaderPanel.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
       ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-      panel2.ResumeLayout(false);
-      panel2.PerformLayout();
+      searchPanel.ResumeLayout(false);
+      searchPanel.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
       DesktopPanel.ResumeLayout(false);
       panel1.ResumeLayout(false);
@@ -356,14 +359,13 @@
     private Label label1;
     private Panel DesktopPanel;
     private Panel panel1;
-    private Button button7;
-    private Button button6;
-    private Label label2;
+    private Button prevBtn;
+    private Label fnameLabel;
     private TextBox textBox1;
-    private Panel panel2;
+    private Panel searchPanel;
     private PictureBox pictureBox1;
     private PictureBox pictureBox2;
     private PictureBox pictureBox3;
-    private Button button8;
+    private Button nextBtn;
   }
 }

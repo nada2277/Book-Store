@@ -2,6 +2,7 @@
 
 using Autofac;
 using BookStore.Application.Services;
+using BookStore.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,10 +33,14 @@ namespace BookStore.User.Forms
 
       if (CustomerService.IsUsrNameExisit(textBox2.Text.ToString()))
       {
-        if (CustomerService.IsLogin(textBox2.Text, textBox1.Text))
+        Customer customer = CustomerService.IsLogin(textBox2.Text, textBox1.Text);
+        if (customer is not null)
         {
           this.Close();
-          mainForm.ShowBooks();
+          if (!customer.IsAdmin)
+            mainForm.ShowUserForm(customer);
+          else
+            mainForm.ShowAdminForm(customer);
         }
         else
           label3.Text = "Wrong Passwprd";
@@ -52,7 +57,7 @@ namespace BookStore.User.Forms
 
     private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
     {
-      
+
       this.Close();
       mainForm.ShowRegistration();
     }

@@ -1,4 +1,6 @@
 
+using BookStore.Admin;
+using BookStore.Models;
 using BookStore.User.Forms;
 
 namespace BookStore.User
@@ -6,7 +8,8 @@ namespace BookStore.User
   public partial class Form1 : Form
   {
     LoginForm loginForm;
-    HomeForm booksForm;
+    HomeForm homeForm;
+    AdminForm adminForm;
     RegistrationForm registrationForm;
     public Form1()
     {
@@ -14,14 +17,23 @@ namespace BookStore.User
       ShowLogin();
     }
 
-    public void ShowBooks()
+    public void ShowUserForm(Customer customer)
     {
-      booksForm = new();
-      booksForm.TopLevel = false;
-      booksForm.FormBorderStyle = FormBorderStyle.None;
-      booksForm.Dock = DockStyle.Fill;
-      booksForm.Show();
-      this?.Controls.Add(booksForm);
+      homeForm = new HomeForm(customer);
+      homeForm.TopLevel = false;
+      homeForm.FormBorderStyle = FormBorderStyle.None;
+      homeForm.Dock = DockStyle.Fill;
+      homeForm.Show();
+      this?.Controls.Add(homeForm);
+    }
+    public void ShowAdminForm(Customer customer)
+    {
+      adminForm = new AdminForm();
+      adminForm.TopLevel = false;
+      adminForm.FormBorderStyle = FormBorderStyle.None;
+      adminForm.Dock = DockStyle.Fill;
+      adminForm.Show();
+      this?.Controls.Add(adminForm);
     }
     public void ShowRegistration()
     {

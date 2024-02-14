@@ -2,7 +2,7 @@ using BookStore.Admin.Forms;
 
 namespace BookStore.Admin
 {
-  public partial class Form1 : Form
+  public partial class AdminForm : Form
   {
     private Form activeForm = new Form();
     private BooksForm booksForm = new BooksForm();
@@ -10,7 +10,7 @@ namespace BookStore.Admin
     private OrdersForm ordersForm = new OrdersForm();
     private CategoriesForm categoriesForm = new CategoriesForm();
 
-    public Form1()
+    public AdminForm()
     {
       InitializeComponent();
     }

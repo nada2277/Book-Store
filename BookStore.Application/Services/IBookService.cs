@@ -16,6 +16,7 @@ namespace BookStore.Application.Services
     bool DeleteBook(Book book);
     List<Book> GetByCategoryName(string name);
     List<Book> GetBooksByName(string name);
+    int GetCount();
 
   }
 }

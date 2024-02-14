@@ -1,6 +1,6 @@
 ﻿namespace BookStore.Admin
 {
-  partial class Form1
+  partial class AdminForm
   {
     /// <summary>
     ///  Required designer variable.
@@ -28,7 +28,7 @@
     /// </summary>
     private void InitializeComponent()
     {
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminForm));
       panelMenu = new Panel();
       button5 = new Button();
       button4 = new Button();
