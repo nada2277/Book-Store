@@ -3,6 +3,7 @@ using BookStore.Application.Contracts;
 using BookStore.Application.Services;
 using BookStore.Context;
 using BookStore.Infrastructure.Repositories;
+
 using IContainer = Autofac.IContainer;
 
 namespace Test.Presentation.AutoFag
