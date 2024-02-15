@@ -17,5 +17,8 @@ namespace BookStore.Application.Services
     List<Book> GetByCategoryName(string name);
     List<Book> GetBooksByName(string name);
 
+    int GetCount();
+
+
   }
 }

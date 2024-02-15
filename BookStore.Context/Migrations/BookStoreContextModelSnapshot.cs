@@ -129,11 +129,18 @@ namespace BookStore.Context.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+
+                        .HasColumnType("nvarchar(450)");
+
 
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("bit");
+
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -145,13 +152,30 @@ namespace BookStore.Context.Migrations
 
                     b.Property<string>("Phone")
                         .IsRequired()
+
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProfilePic")
+                        .IsRequired()
+
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("Phone")
+                        .IsUnique();
+
+                    b.HasIndex("UserName")
+                        .IsUnique();
+
 
                     b.ToTable("customers");
                 });

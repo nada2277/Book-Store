@@ -54,5 +54,11 @@ namespace BookStore.Application.Services
      _BookRepository.GetByCategory(name).ToList();
 
 
+    public int GetCount()
+    {
+     int count= _BookRepository.GetAll().Count();
+      return (int)Math.Ceiling(count / 10.0);
+    }
+
   }
 }

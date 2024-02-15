@@ -17,6 +17,9 @@ namespace BookStore.Models
         public string Description { get; set; }
         public double Price { get; set; }
 
+        public string BookImg { get; set; }
+
+
 
 
         //Book-Order many to many

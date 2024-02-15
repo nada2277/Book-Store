@@ -28,5 +28,23 @@ namespace BookStore.Context
         }
 
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Specify unique constraint for UserName
+            modelBuilder.Entity<Customer>()
+                .HasIndex(c => c.UserName)
+                .IsUnique();
+
+            modelBuilder.Entity<Customer>()
+                .HasIndex(c => c.Phone)
+                .IsUnique();
+
+            modelBuilder.Entity<Customer>()
+                .HasIndex(c => c.Email)
+                .IsUnique();
+
+        }
+
+
     }
 }
