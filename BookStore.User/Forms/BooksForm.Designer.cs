@@ -30,34 +30,82 @@ namespace BookStore.User.Forms
     /// </summary>
     private void InitializeComponent()
     {
-      flowLayoutPanel1 = new FlowLayoutPanel();
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BooksForm));
+      panel1 = new Panel();
+      nextBtn = new Button();
+      prevBtn = new Button();
+      mainPanel = new FlowLayoutPanel();
+      panel1.SuspendLayout();
       SuspendLayout();
       // 
-      // flowLayoutPanel1
+      // panel1
       // 
-      flowLayoutPanel1.AutoScroll = true;
-      flowLayoutPanel1.BackColor = Color.White;
-      flowLayoutPanel1.Dock = DockStyle.Fill;
-      flowLayoutPanel1.Location = new Point(0, 0);
-      flowLayoutPanel1.Name = "flowLayoutPanel1";
-      flowLayoutPanel1.Padding = new Padding(120, 0, 0, 0);
-      flowLayoutPanel1.Size = new Size(1612, 965);
-      flowLayoutPanel1.TabIndex = 0;
+      panel1.BackColor = Color.White;
+      panel1.Controls.Add(nextBtn);
+      panel1.Controls.Add(prevBtn);
+      panel1.Dock = DockStyle.Bottom;
+      panel1.Location = new Point(0, 932);
+      panel1.Name = "panel1";
+      panel1.Size = new Size(1612, 66);
+      panel1.TabIndex = 1;
+      // 
+      // nextBtn
+      // 
+      nextBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+      nextBtn.BackgroundImage = (Image)resources.GetObject("nextBtn.BackgroundImage");
+      nextBtn.BackgroundImageLayout = ImageLayout.Stretch;
+      nextBtn.Cursor = Cursors.Hand;
+      nextBtn.FlatAppearance.BorderSize = 0;
+      nextBtn.FlatStyle = FlatStyle.Flat;
+      nextBtn.Location = new Point(1498, 6);
+      nextBtn.Name = "nextBtn";
+      nextBtn.Size = new Size(62, 54);
+      nextBtn.TabIndex = 1;
+      nextBtn.UseVisualStyleBackColor = true;
+      nextBtn.Click += nextBtn_Click;
+      // 
+      // prevBtn
+      // 
+      prevBtn.BackgroundImage = (Image)resources.GetObject("prevBtn.BackgroundImage");
+      prevBtn.BackgroundImageLayout = ImageLayout.Stretch;
+      prevBtn.Cursor = Cursors.Hand;
+      prevBtn.FlatAppearance.BorderSize = 0;
+      prevBtn.FlatStyle = FlatStyle.Flat;
+      prevBtn.Location = new Point(47, 6);
+      prevBtn.Name = "prevBtn";
+      prevBtn.Size = new Size(62, 54);
+      prevBtn.TabIndex = 0;
+      prevBtn.UseVisualStyleBackColor = true;
+      prevBtn.Click += prevBtn_Click;
+      // 
+      // mainPanel
+      // 
+      mainPanel.Dock = DockStyle.Fill;
+      mainPanel.Location = new Point(0, 0);
+      mainPanel.Name = "mainPanel";
+      mainPanel.Padding = new Padding(120, 0, 0, 0);
+      mainPanel.Size = new Size(1612, 932);
+      mainPanel.TabIndex = 2;
       // 
       // BooksForm
       // 
       AutoScaleDimensions = new SizeF(10F, 25F);
       AutoScaleMode = AutoScaleMode.Font;
       AutoScroll = true;
-      ClientSize = new Size(1612, 965);
-      Controls.Add(flowLayoutPanel1);
+      BackColor = Color.White;
+      ClientSize = new Size(1612, 998);
+      Controls.Add(mainPanel);
+      Controls.Add(panel1);
       Name = "BooksForm";
-      Text = "Home";
+      Text = "BookForm";
+      panel1.ResumeLayout(false);
       ResumeLayout(false);
     }
 
     #endregion
-
-    private FlowLayoutPanel flowLayoutPanel1;
+    private Panel panel1;
+    private Button nextBtn;
+    private Button prevBtn;
+    private FlowLayoutPanel mainPanel;
   }
 }

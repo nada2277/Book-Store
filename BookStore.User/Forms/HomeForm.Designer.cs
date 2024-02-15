@@ -44,12 +44,9 @@
       pictureBox1 = new PictureBox();
       searchPanel = new Panel();
       pictureBox2 = new PictureBox();
-      textBox1 = new TextBox();
+      textBoxSearch = new TextBox();
       fnameLabel = new Label();
       DesktopPanel = new Panel();
-      panel1 = new Panel();
-      nextBtn = new Button();
-      prevBtn = new Button();
       panelMenu.SuspendLayout();
       panelLogo.SuspendLayout();
       HeaderPanel.SuspendLayout();
@@ -58,8 +55,6 @@
       ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
       searchPanel.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-      DesktopPanel.SuspendLayout();
-      panel1.SuspendLayout();
       SuspendLayout();
       // 
       // panelMenu
@@ -176,6 +171,7 @@
       // 
       // button1
       // 
+      button1.BackColor = Color.FromArgb(157, 178, 191);
       button1.Cursor = Cursors.Hand;
       button1.Dock = DockStyle.Top;
       button1.FlatAppearance.BorderSize = 0;
@@ -190,7 +186,7 @@
       button1.Size = new Size(311, 100);
       button1.TabIndex = 0;
       button1.Text = "Books";
-      button1.UseVisualStyleBackColor = true;
+      button1.UseVisualStyleBackColor = false;
       button1.Click += button1_Click;
       // 
       // panelLogo
@@ -272,7 +268,7 @@
       // 
       searchPanel.BackColor = Color.FromArgb(221, 230, 237);
       searchPanel.Controls.Add(pictureBox2);
-      searchPanel.Controls.Add(textBox1);
+      searchPanel.Controls.Add(textBoxSearch);
       searchPanel.Location = new Point(71, 50);
       searchPanel.Name = "searchPanel";
       searchPanel.Size = new Size(391, 52);
@@ -288,17 +284,18 @@
       pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
       pictureBox2.TabIndex = 1;
       pictureBox2.TabStop = false;
+      pictureBox2.Click += pictureBox2_Click;
       // 
-      // textBox1
+      // textBoxSearch
       // 
-      textBox1.BackColor = Color.FromArgb(221, 230, 237);
-      textBox1.BorderStyle = BorderStyle.None;
-      textBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      textBox1.ForeColor = Color.FromArgb(39, 55, 77);
-      textBox1.Location = new Point(27, 8);
-      textBox1.Name = "textBox1";
-      textBox1.Size = new Size(301, 32);
-      textBox1.TabIndex = 0;
+      textBoxSearch.BackColor = Color.FromArgb(221, 230, 237);
+      textBoxSearch.BorderStyle = BorderStyle.None;
+      textBoxSearch.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      textBoxSearch.ForeColor = Color.FromArgb(39, 55, 77);
+      textBoxSearch.Location = new Point(27, 8);
+      textBoxSearch.Name = "textBoxSearch";
+      textBoxSearch.Size = new Size(301, 32);
+      textBoxSearch.TabIndex = 0;
       // 
       // fnameLabel
       // 
@@ -315,54 +312,11 @@
       // 
       // DesktopPanel
       // 
-      DesktopPanel.Controls.Add(panel1);
       DesktopPanel.Dock = DockStyle.Fill;
       DesktopPanel.Location = new Point(311, 144);
       DesktopPanel.Name = "DesktopPanel";
       DesktopPanel.Size = new Size(1035, 770);
       DesktopPanel.TabIndex = 2;
-      // 
-      // panel1
-      // 
-      panel1.BackColor = Color.White;
-      panel1.Controls.Add(nextBtn);
-      panel1.Controls.Add(prevBtn);
-      panel1.Dock = DockStyle.Bottom;
-      panel1.Location = new Point(0, 699);
-      panel1.Name = "panel1";
-      panel1.Size = new Size(1035, 71);
-      panel1.TabIndex = 0;
-      // 
-      // nextBtn
-      // 
-      nextBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-      nextBtn.BackColor = Color.Transparent;
-      nextBtn.BackgroundImage = (Image)resources.GetObject("nextBtn.BackgroundImage");
-      nextBtn.BackgroundImageLayout = ImageLayout.Zoom;
-      nextBtn.Cursor = Cursors.Hand;
-      nextBtn.FlatAppearance.BorderSize = 0;
-      nextBtn.FlatStyle = FlatStyle.Flat;
-      nextBtn.Location = new Point(937, 9);
-      nextBtn.Name = "nextBtn";
-      nextBtn.Size = new Size(54, 50);
-      nextBtn.TabIndex = 2;
-      nextBtn.UseVisualStyleBackColor = false;
-      nextBtn.Click += nextBtn_Click;
-      // 
-      // prevBtn
-      // 
-      prevBtn.BackColor = Color.Transparent;
-      prevBtn.BackgroundImage = (Image)resources.GetObject("prevBtn.BackgroundImage");
-      prevBtn.BackgroundImageLayout = ImageLayout.Zoom;
-      prevBtn.Cursor = Cursors.Hand;
-      prevBtn.FlatAppearance.BorderSize = 0;
-      prevBtn.FlatStyle = FlatStyle.Flat;
-      prevBtn.Location = new Point(35, 9);
-      prevBtn.Name = "prevBtn";
-      prevBtn.Size = new Size(52, 48);
-      prevBtn.TabIndex = 1;
-      prevBtn.UseVisualStyleBackColor = false;
-      prevBtn.Click += prevBtn_Click;
       // 
       // HomeForm
       // 
@@ -385,8 +339,6 @@
       searchPanel.ResumeLayout(false);
       searchPanel.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-      DesktopPanel.ResumeLayout(false);
-      panel1.ResumeLayout(false);
       ResumeLayout(false);
     }
 
@@ -402,15 +354,12 @@
     private Panel panelLogo;
     private Label label1;
     private Panel DesktopPanel;
-    private Panel panel1;
-    private Button prevBtn;
     private Label fnameLabel;
-    private TextBox textBox1;
+    private TextBox textBoxSearch;
     private Panel searchPanel;
     private PictureBox pictureBox1;
     private PictureBox pictureBox2;
     private PictureBox pictureBox3;
-    private Button nextBtn;
     private Button button6;
     private PictureBox pictureBox4;
   }

@@ -1,4 +1,6 @@
-﻿using BookStore.Models;
+﻿using BookStore.Admin.Forms;
+using BookStore.Application.Services;
+using BookStore.Models;
 using BookStore.User.Forms;
 using System;
 using System.Collections.Generic;
@@ -10,61 +12,85 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Test.Presentation.AutoFag;
+using static System.Reflection.Metadata.BlobBuilder;
+using Autofac;
 
 namespace BookStore.User.Forms
 {
   public partial class BooksForm : Form
   {
+    int customerId;
+    int pageNum;
+    int maxPageNum;
 
-    public BooksForm(List<Book> books,int id)
+    Autofac.IContainer connectionBook;
+    IBookService BookService;
+    public BooksForm(int id)
     {
       InitializeComponent();
-      Random random = new Random();
+      connectionBook = AutoFag.RegisterBook();
+      BookService = connectionBook.Resolve<IBookService>();
+
+      pageNum = 1;
+      maxPageNum = BookService.GetCount();
+      customerId = id;
+
+      ShowButtons();
+      ShowBooks(BookService.GetAllPagination(10, pageNum));
+
+    }
+    void ShowButtons()
+    {
+      if (maxPageNum == 1)
+      {
+        prevBtn.Visible = false;
+        nextBtn.Visible = false;
+      }
+      else if (pageNum == 1)
+      {
+        prevBtn.Visible = false;
+        nextBtn.Visible = true;
+      }
+      else if (pageNum == maxPageNum)
+      {
+        prevBtn.Visible = true;
+        nextBtn.Visible = false;
+      }
+      else
+      {
+        prevBtn.Visible = true;
+        nextBtn.Visible = true;
+      }
+    }
+    void ShowBooks(List<Book> books)
+    {
+      mainPanel.Controls.Clear();
       foreach (var book in books)
       {
-        var bookControl = new BookControl(id);
+        var bookControl = new BookControl(customerId);
         bookControl.BookName = book.Name;
-        bookControl.BookPrice = book.Price.ToString() +" LE";
+        bookControl.BookPrice = book.Price.ToString() + " LE";
         bookControl.BookImage = Image.FromFile(Path.GetFullPath($"..\\..\\..\\Images\\{book.BookImg}"));
         bookControl.id = book.Id;
-        //Bitmap b = new Bitmap(book.BookImage);
-        //book.BookImage = ResizeImage(b, new Size(600, 450));
-        flowLayoutPanel1.Controls.Add(bookControl);
+        mainPanel.Controls.Add(bookControl);
       }
- 
-
     }
-
-    private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+    private void prevBtn_Click(object sender, EventArgs e)
     {
-
+      pageNum--;
+      ShowButtons();
+      ShowBooks(BookService.GetAllPagination(10, pageNum));
     }
 
-    //private static Image ResizeImage(Image imgToResize, Size size)
-    //{
-    //  // Get the image current width
-    //  int sourceWidth = imgToResize.Width;
-    //  // Get the image current height
-    //  int sourceHeight = imgToResize.Height;
-    //  float nPercent = 0;
-    //  float nPercentW = 0;
-    //  float nPercentH = 0;
-    //  // Calculate width and height with new desired size
-    //  nPercentW = ((float)size.Width / (float)sourceWidth);
-    //  nPercentH = ((float)size.Height / (float)sourceHeight);
-    //  nPercent = Math.Min(nPercentW, nPercentH);
-    //  // New Width and Height
-    //  int destWidth = (int)(sourceWidth * nPercent);
-    //  int destHeight = (int)(sourceHeight * nPercent);
-    //  Bitmap b = new Bitmap(destWidth, destHeight);
-    //  Graphics g = Graphics.FromImage((Image)b);
-    //  g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-    //  // Draw image with new width and height
-    //  g.DrawImage(imgToResize, 0, 0, destWidth, destHeight);
-    //  g.Dispose();
-    //  return (Image)b;
-    //}
+    private void nextBtn_Click(object sender, EventArgs e)
+    {
+      pageNum++;
+      ShowButtons();
+      ShowBooks(BookService.GetAllPagination(10, pageNum));
+    }
 
+   
   }
 
 
