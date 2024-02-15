@@ -27,6 +27,7 @@ namespace BookStore.Context
 
         }
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Specify unique constraint for UserName
@@ -43,6 +44,7 @@ namespace BookStore.Context
                 .IsUnique();
 
         }
+
 
     }
 }
