@@ -63,9 +63,10 @@ namespace BookStore.Application.Services
      _CustomerRepository.GetCustomerOrders(CustomerId).ToList();
     public void AddToCart(int bookId, int customerId, int quantity)=>
       _CustomerRepository.AddCartItem(bookId, customerId, quantity);
-
-    public List<CartItem> GetCartByCustomerId(int id)=>
-         _CustomerRepository.GetCustomerCart(id).ToList();
+    public bool HasItemInCart(int customerId) {
+      return _CustomerRepository.HasItemInCart(customerId);
+    }
+    
 
    
   }

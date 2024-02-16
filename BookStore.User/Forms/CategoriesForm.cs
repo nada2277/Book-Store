@@ -15,6 +15,10 @@ namespace BookStore.User.Forms
     public CategoriesForm()
     {
       InitializeComponent();
+      System.Drawing.Drawing2D.GraphicsPath graphicsPath = new();
+      graphicsPath.AddEllipse(0, 0, pictureBox1.Width, pictureBox1.Height);
+      Region region = new Region(graphicsPath);
+      pictureBox1.Region = region;
     }
   }
 }

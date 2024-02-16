@@ -1,4 +1,5 @@
-﻿using BookStore.Models;
+﻿using BookStore.DTOs;
+using BookStore.Models;
 
 namespace BookStore.Application.Services
 {
@@ -7,7 +8,7 @@ namespace BookStore.Application.Services
     bool AddCartItem(CartItem CartItem);
     bool UpdateCartItem(CartItem CartItem);
     bool DeleteCartItem(CartItem CartItem);
-    bool ChangeItemQuantity(CartItem CartItem,int quantity);
-
+    bool ChangeItemQuantity(int CartItemId,int quantity);
+    List<BookCart> BookCartItems(int CustomerId);
   }
 }

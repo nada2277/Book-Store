@@ -41,8 +41,7 @@ namespace BookStore.Infrastructure.Repositories
       context.SaveChanges();
     }
 
-    public IQueryable<CartItem> GetCustomerCart(int customerId) =>
-      context.cartItems.Where(c => c.CustomerID == customerId);
+    
 
     public IQueryable<Order> GetCustomerOrders(int customerId)
     {
@@ -50,5 +49,8 @@ namespace BookStore.Infrastructure.Repositories
 
       return customerOrders;
     }
+
+    public bool HasItemInCart(int customerId)=>
+      context.cartItems.Any(c=>c.CustomerID == customerId);
   }
 }

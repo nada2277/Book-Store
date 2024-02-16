@@ -1,5 +1,8 @@
+using Autofac;
+using BookStore.Application.Services;
 using BookStore.Models;
 using System.Runtime.InteropServices;
+using Test.Presentation.AutoFag;
 
 
 namespace BookStore.User.Forms
@@ -8,20 +11,27 @@ namespace BookStore.User.Forms
   {
     Form activeForm = new Form();
     BooksForm booksForm;
-    CartForm cartForm = new CartForm();
+    CartForm cartForm;
+    EmptyCart emptyCart;
     OrdersForm ordersForm = new OrdersForm();
     CategoriesForm categoriesForm = new CategoriesForm();
     SettingForm settingForm = new SettingForm();
     Form1 mainForm;
     Customer customer;
-
+    IContainer connectionCustomer;
+    ICustomerService CustomerService;
     public HomeForm(Customer _customer, Form1 form)
     {
       InitializeComponent();
 
+      connectionCustomer = AutoFag.RegisterCustomer();
+      CustomerService = connectionCustomer.Resolve<ICustomerService>();
+
       mainForm = form;
       customer = _customer;
       booksForm = new BooksForm(customer.Id);
+      emptyCart = new EmptyCart(this);
+
       OpenForm(booksForm, this);
       #region Header
       fnameLabel.Text = customer.FirstName[0].ToString().ToUpper() + customer.FirstName[1..];
@@ -35,8 +45,9 @@ namespace BookStore.User.Forms
       graphicsPath.AddEllipse(0, 0, pictureBox1.Width, pictureBox1.Height);
       Region region = new Region(graphicsPath);
       pictureBox1.Region = region;
-      searchPanel.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, searchPanel.Width, searchPanel.Height, 50, 50)); 
+      searchPanel.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, searchPanel.Width, searchPanel.Height, 50, 50));
       #endregion
+      button1.BackColor = Color.FromArgb(157, 178, 191);
     }
 
     private void ActivateBtn(object btnSender)
@@ -68,9 +79,21 @@ namespace BookStore.User.Forms
       this.DesktopPanel.Tag = form;
       form.BringToFront();
       form.Show();
-      //Headerlabel.Text = form.Text;
+    }
+
+    public void ShowBooks()
+    {
+      OpenForm(booksForm, this);
+      button1.BackColor = Color.FromArgb(157, 178, 191);
 
     }
+
+    public void ShowEmptyCart()
+    {
+      OpenForm(emptyCart, this);
+
+    }
+
 
     private void button1_Click(object sender, EventArgs e) =>
       OpenForm(booksForm, sender);
@@ -81,8 +104,22 @@ namespace BookStore.User.Forms
     private void button3_Click(object sender, EventArgs e) =>
       OpenForm(ordersForm, sender);
 
-    private void button4_Click(object sender, EventArgs e) =>
-      OpenForm(cartForm, sender);
+    private void button4_Click(object sender, EventArgs e)
+    {
+      if (CustomerService.HasItemInCart(customer.Id))
+      {
+        cartForm = new CartForm(customer.Id, this);
+        OpenForm(cartForm, sender);
+      }
+      else
+        OpenForm(emptyCart, this);
+      button4.BackColor = Color.FromArgb(157, 178, 191);
+
+    }
+
+    //private void button4_Click(object sender, EventArgs e)=>
+    //  OpenForm(new CartForm(customer.Id, this), sender);
+
 
     private void button6_Click(object sender, EventArgs e)
     {
@@ -93,7 +130,13 @@ namespace BookStore.User.Forms
 
     private void pictureBox3_Click(object sender, EventArgs e)
     {
-      OpenForm(cartForm, sender);
+      if (CustomerService.HasItemInCart(customer.Id))
+      {
+        cartForm = new CartForm(customer.Id, this);
+        OpenForm(cartForm, sender);
+      }
+      else
+        OpenForm(emptyCart, this);
       button4.BackColor = Color.FromArgb(157, 178, 191);
     }
 

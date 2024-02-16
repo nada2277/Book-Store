@@ -80,6 +80,7 @@ namespace BookStore.User.Forms
       // 
       // mainPanel
       // 
+      mainPanel.AutoScroll = true;
       mainPanel.Dock = DockStyle.Fill;
       mainPanel.Location = new Point(0, 0);
       mainPanel.Name = "mainPanel";

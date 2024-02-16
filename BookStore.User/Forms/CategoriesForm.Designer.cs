@@ -28,32 +28,37 @@
     /// </summary>
     private void InitializeComponent()
     {
-      label1 = new Label();
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CategoriesForm));
+      pictureBox1 = new PictureBox();
+      ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
       SuspendLayout();
       // 
-      // label1
+      // pictureBox1
       // 
-      label1.AutoSize = true;
-      label1.Location = new Point(268, 124);
-      label1.Name = "label1";
-      label1.Size = new Size(96, 25);
-      label1.TabIndex = 0;
-      label1.Text = "Categories";
+      pictureBox1.BackColor = SystemColors.ActiveCaption;
+      pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+      pictureBox1.ImageLocation = "";
+      pictureBox1.Location = new Point(122, 125);
+      pictureBox1.Name = "pictureBox1";
+      pictureBox1.Size = new Size(250, 250);
+      pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
+      pictureBox1.TabIndex = 0;
+      pictureBox1.TabStop = false;
       // 
       // CategoriesForm
       // 
       AutoScaleDimensions = new SizeF(10F, 25F);
       AutoScaleMode = AutoScaleMode.Font;
-      ClientSize = new Size(800, 450);
-      Controls.Add(label1);
+      ClientSize = new Size(1249, 677);
+      Controls.Add(pictureBox1);
       Name = "CategoriesForm";
       Text = "Categories";
+      ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
       ResumeLayout(false);
-      PerformLayout();
     }
 
     #endregion
 
-    private Label label1;
+    private PictureBox pictureBox1;
   }
 }
