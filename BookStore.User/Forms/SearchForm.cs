@@ -22,22 +22,21 @@ namespace BookStore.User.Forms
     int customerId;
     int pageNum;
     int maxPageNum;
-    List<Book> booksResult;
+    string name;
     public SearchForm(int id,string str)
     {
       connectionBook = AutoFag.RegisterBook();
       BookService = connectionBook.Resolve<IBookService>();
 
       InitializeComponent();
-
-      label1.Text = str;
-      booksResult = BookService.GetBooksByName(str);
+      name = str;
+      label1.Text = name;
       customerId = id;
       pageNum = 1;
-      maxPageNum =(int)Math.Ceiling(booksResult.Count/10M);
+      maxPageNum =BookService.GetSearchCount(name);
 
       ShowButtons();
-      ShowBooks(booksResult.Take(10).ToList());
+      ShowBooks(BookService.GetBooksByName(str, 10, 1));
       
     }
     void ShowBooks(List<Book> books)
@@ -82,14 +81,14 @@ namespace BookStore.User.Forms
     {
       pageNum--;
       ShowButtons();
-      ShowBooks(booksResult.Skip(10*(pageNum-1)).Take(10).ToList());
+      ShowBooks(BookService.GetBooksByName(name, 10, pageNum));
     }
 
     private void nextBtn_Click(object sender, EventArgs e)
     {
       pageNum++;
       ShowButtons();
-      ShowBooks(booksResult.Skip(10*(pageNum-1)).Take(10).ToList());
+      ShowBooks(BookService.GetBooksByName(name, 10, pageNum));
     }
   }
 }

@@ -15,10 +15,10 @@ namespace BookStore.Application.Services
     bool UpdateBook(Book book);
     bool DeleteBook(Book book);
     List<Book> GetByCategoryName(string name);
-    List<Book> GetBooksByName(string name);
+    List<Book> GetBooksByName(string name, int num, int pageIndex);
 
     int GetCount();
-
+    int GetSearchCount(string name);
 
   }
 }

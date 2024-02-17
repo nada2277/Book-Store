@@ -19,8 +19,8 @@ namespace BookStore.Application.Services
       _BookRepository.GetAll().Skip(num * (pageIndex - 1)).Take(num).ToList();
 
 
-    public List<Book> GetBooksByName(string name) =>
-      _BookRepository.GetAll().Where(b => b.Name.Contains(name)).ToList();
+    public List<Book> GetBooksByName(string name, int num, int pageIndex) =>
+      _BookRepository.GetAll().Where(b => b.Name.Contains(name)).Skip(num * (pageIndex - 1)).Take(num).ToList();
 
 
     public Book GetBookById(int id) => _BookRepository.GetById(id);
@@ -57,6 +57,11 @@ namespace BookStore.Application.Services
     public int GetCount()
     {
      int count= _BookRepository.GetAll().Count();
+      return (int)Math.Ceiling(count / 10.0);
+    }
+    public int GetSearchCount(string name)
+    {
+     int count= _BookRepository.GetAll().Where(b => b.Name.Contains(name)).Count();
       return (int)Math.Ceiling(count / 10.0);
     }
 
