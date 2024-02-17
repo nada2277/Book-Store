@@ -17,9 +17,9 @@ namespace BookStore.User.Forms
         OrdersForm ordersForm = new OrdersForm();
         CategoriesForm categoriesForm;
         OneCategoryForm oneCategoryForm;
-        SettingForm settingForm = new SettingForm();
-        Form1 mainForm;
         Customer customer;
+        SettingForm settingForm;
+        Form1 mainForm;
         IContainer connectionCustomer;
         ICustomerService CustomerService;
         public HomeForm(Customer _customer, Form1 form)
@@ -31,6 +31,10 @@ namespace BookStore.User.Forms
 
             mainForm = form;
             customer = _customer;
+
+            settingForm = new SettingForm(customer);
+
+
             booksForm = new BooksForm(customer.Id);
             emptyCart = new EmptyCart(this);
             categoriesForm = new CategoriesForm(this);
