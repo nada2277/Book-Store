@@ -50,6 +50,10 @@ namespace BookStore.Infrastructure.Repositories
         {
             return context.books.Where(b => b.BookCategories.Any(bc => bc.Category.Name.ToLower().Contains(name.ToLower())));
         }
+        public int GetCountByCategory(string name)
+        {
+            return context.books.Where(b => b.BookCategories.Any(bc => bc.Category.Name.ToLower().Contains(name.ToLower()))).Count();
+        }
 
 
         public IQueryable<Book> SearchName(string name)
