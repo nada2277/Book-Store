@@ -94,12 +94,15 @@ namespace BookStore.User.Forms
         public void ShowEmptyCart()
         {
             OpenForm(emptyCart, this);
+            button4.BackColor = Color.FromArgb(157, 178, 191);
+
 
         }
         public void ShowCat(string str)
         {
             oneCategoryForm = new OneCategoryForm(customer.Id, str);
             OpenForm(oneCategoryForm, this);
+            button2.BackColor = Color.FromArgb(157, 178, 191);
 
         }
 
@@ -166,6 +169,8 @@ namespace BookStore.User.Forms
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(textBoxSearch.Text))
+                return;
             SearchForm SearchForm = new SearchForm(customer.Id, textBoxSearch.Text);
             OpenForm(SearchForm, sender);
         }

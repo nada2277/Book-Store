@@ -231,7 +231,6 @@
             Name = "CategoriesForm";
             Padding = new Padding(100, 0, 0, 0);
             Text = "Categories";
-            Load += CategoriesForm_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();

@@ -57,7 +57,7 @@ namespace BookStore.User.Forms
 
         void ShowButtons()
         {
-            if (maxPageNum == 1)
+            if (maxPageNum == 1|| maxPageNum == 0)
             {
                 prevBtn.Visible = false;
                 nextBtn.Visible = false;

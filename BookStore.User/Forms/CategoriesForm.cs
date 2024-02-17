@@ -20,21 +20,6 @@ namespace BookStore.User.Forms
             this.HomeForm = homeForm;
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CategoriesForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void code_Click(object sender, EventArgs e)
         {
             HomeForm.ShowCat("code");
@@ -43,26 +28,20 @@ namespace BookStore.User.Forms
         private void Fiction_Click(object sender, EventArgs e)
         {
             HomeForm.ShowCat("Fiction");
-
-
         }
 
         private void Suspense_Click(object sender, EventArgs e)
         {
             HomeForm.ShowCat("Suspense");
-
-
         }
 
         private void Beauty_Click(object sender, EventArgs e)
         {
             HomeForm.ShowCat("Beauty");
-
         }
-
         private void Science_Click(object sender, EventArgs e)
         {
-
+            HomeForm.ShowCat("Science"); 
         }
 
     }
