@@ -68,9 +68,6 @@ namespace BookStore.Application.Services
             return _CustomerRepository.HasItemInCart(customerId);
         }
 
-        public bool IsUsrPassExisit(string Password)
-        {
-           return  _CustomerRepository.GetAll().Any(Cust => Cust.Password == Password);
-        }
+       
     }
 }

@@ -355,7 +355,7 @@ namespace BookStore.User.Forms
 
                 isValid = false;
             }
-            else if (!CustomerService.IsUsrPassExisit(password))
+            else if (password != customer.Password)
             {
                 lblPasswordError.Text = "Current Password Does not Exist";
                 lblPasswordError.ForeColor = Color.Red;
