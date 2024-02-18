@@ -38,9 +38,9 @@ namespace BookStore.User.Forms
 
         Customer customer;
 
+        private HomeForm homeForm;
 
-        Form1 mainForm;
-        public SettingForm(Customer _customer)
+        public SettingForm(Customer _customer, HomeForm _homeForm)
         {
             InitializeComponent();
 
@@ -60,8 +60,7 @@ namespace BookStore.User.Forms
             //Responsive In WINDOW:
             //this.Resize += Form1_Resize;
 
-
-
+            homeForm = _homeForm;
 
         }
 
@@ -160,7 +159,8 @@ namespace BookStore.User.Forms
             var connectionCustomer = AutoFag.RegisterCustomer();
             ICustomerService CustomerService = connectionCustomer.Resolve<ICustomerService>();
 
-            string imagePath = Path.GetFullPath(customer.ProfilePic);
+            //string imagePath = Path.GetFullPath(customer.ProfilePic);
+            string imagePath = Path.GetFullPath($"..\\..\\..\\Images\\{customer.ProfilePic}");
 
             Image image = Image.FromFile(imagePath);
 
@@ -409,6 +409,8 @@ namespace BookStore.User.Forms
                 SetPlaceholder(textBox8);
 
 
+                homeForm.UpdateProfilePicture(PathProfilePic);
+
                 MessageBox.Show("Profile updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
@@ -457,7 +459,9 @@ namespace BookStore.User.Forms
 
                     // Assign the selected image to the PictureBox
                     pictureBox1.Image = selectedImage;
-                    PathProfilePic = selectedImagePath;
+
+                    PathProfilePic = Path.GetFileName(selectedImagePath);
+
                 }
                 catch (Exception ex)
                 {

@@ -64,7 +64,7 @@
             // textBox1
             // 
             textBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(316, 117);
+            textBox1.Location = new Point(335, 117);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(250, 40);
@@ -73,7 +73,7 @@
             // textBox2
             // 
             textBox2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox2.Location = new Point(661, 117);
+            textBox2.Location = new Point(710, 117);
             textBox2.Multiline = true;
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(250, 40);
@@ -81,7 +81,7 @@
             // 
             // textBox3
             // 
-            textBox3.Location = new Point(316, 229);
+            textBox3.Location = new Point(335, 229);
             textBox3.Multiline = true;
             textBox3.Name = "textBox3";
             textBox3.Size = new Size(250, 40);
@@ -89,7 +89,7 @@
             // 
             // textBox4
             // 
-            textBox4.Location = new Point(661, 229);
+            textBox4.Location = new Point(710, 229);
             textBox4.Multiline = true;
             textBox4.Name = "textBox4";
             textBox4.Size = new Size(250, 40);
@@ -99,7 +99,7 @@
             // 
             pictureBox1.Location = new Point(70, 143);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(177, 159);
+            pictureBox1.Size = new Size(210, 196);
             pictureBox1.TabIndex = 5;
             pictureBox1.TabStop = false;
             // 
@@ -107,7 +107,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Emoji", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(30, 9);
+            label2.Location = new Point(49, 26);
             label2.Name = "label2";
             label2.Size = new Size(170, 64);
             label2.TabIndex = 6;
@@ -115,7 +115,7 @@
             // 
             // textBox5
             // 
-            textBox5.Location = new Point(316, 335);
+            textBox5.Location = new Point(335, 335);
             textBox5.Multiline = true;
             textBox5.Name = "textBox5";
             textBox5.Size = new Size(250, 40);
@@ -123,7 +123,7 @@
             // 
             // textBox6
             // 
-            textBox6.Location = new Point(661, 335);
+            textBox6.Location = new Point(710, 335);
             textBox6.Multiline = true;
             textBox6.Name = "textBox6";
             textBox6.Size = new Size(250, 40);
@@ -131,7 +131,7 @@
             // 
             // textBox7
             // 
-            textBox7.Location = new Point(316, 447);
+            textBox7.Location = new Point(335, 447);
             textBox7.Multiline = true;
             textBox7.Name = "textBox7";
             textBox7.Size = new Size(250, 40);
@@ -139,7 +139,7 @@
             // 
             // textBox8
             // 
-            textBox8.Location = new Point(661, 447);
+            textBox8.Location = new Point(710, 447);
             textBox8.Multiline = true;
             textBox8.Name = "textBox8";
             textBox8.Size = new Size(250, 40);
@@ -150,7 +150,7 @@
             button1.BackColor = Color.FromArgb(39, 55, 77);
             button1.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             button1.ForeColor = SystemColors.ButtonHighlight;
-            button1.Location = new Point(499, 554);
+            button1.Location = new Point(535, 549);
             button1.Name = "button1";
             button1.Size = new Size(223, 56);
             button1.TabIndex = 11;
@@ -221,7 +221,7 @@
             button2.FlatAppearance.BorderSize = 2;
             button2.Font = new Font("Segoe UI", 22F, FontStyle.Bold, GraphicsUnit.Point, 0);
             button2.ForeColor = SystemColors.ControlLightLight;
-            button2.Location = new Point(130, 275);
+            button2.Location = new Point(148, 304);
             button2.Name = "button2";
             button2.Size = new Size(60, 50);
             button2.TabIndex = 20;

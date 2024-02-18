@@ -32,7 +32,7 @@ namespace BookStore.User.Forms
             mainForm = form;
             customer = _customer;
 
-            settingForm = new SettingForm(customer);
+            settingForm = new SettingForm(customer , this);
 
 
             booksForm = new BooksForm(customer.Id);
@@ -42,8 +42,8 @@ namespace BookStore.User.Forms
             OpenForm(booksForm, this);
             #region Header
             fnameLabel.Text = customer.FirstName[0].ToString().ToUpper() + customer.FirstName[1..];
-            //pictureBox1.BackgroundImage = Image.FromFile(Path.GetFullPath($"..\\..\\..\\Images\\{customer.ProfilePic}"));
-            pictureBox1.BackgroundImage = Image.FromFile(Path.GetFullPath(customer.ProfilePic));
+            pictureBox1.BackgroundImage = Image.FromFile(Path.GetFullPath($"..\\..\\..\\Images\\{customer.ProfilePic}"));
+            //pictureBox1.BackgroundImage = Image.FromFile(Path.GetFullPath(customer.ProfilePic));
 
             if (!customer.ProfilePic.Equals("profilePicture.png"))
                 pictureBox1.BackColor = Color.Transparent;
@@ -180,6 +180,13 @@ namespace BookStore.User.Forms
             OpenForm(SearchForm, sender);
         }
 
+
+        public void UpdateProfilePicture(string profilePicPath)
+        {
+            pictureBox1.BackgroundImage = Image.FromFile(Path.GetFullPath($"..\\..\\..\\Images\\{profilePicPath}"));
+            if (!profilePicPath.Equals("profilePicture.png"))
+                pictureBox1.BackColor = Color.Transparent;
+        }
 
 
 
