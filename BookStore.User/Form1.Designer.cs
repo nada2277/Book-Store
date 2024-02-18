@@ -20,26 +20,27 @@
       base.Dispose(disposing);
     }
 
-    #region Windows Form Designer generated code
+        #region Windows Form Designer generated code
 
-    /// <summary>
-    ///  Required method for Designer support - do not modify
-    ///  the contents of this method with the code editor.
-    /// </summary>
-    private void InitializeComponent()
-    {
-      SuspendLayout();
-      // 
-      // Form1
-      // 
-      AutoScaleDimensions = new SizeF(10F, 25F);
-      AutoScaleMode = AutoScaleMode.Font;
-      ClientSize = new Size(1893, 944);
-      Name = "Form1";
-      Text = "Form1";
-      ResumeLayout(false);
+        /// <summary>
+        ///  Required method for Designer support - do not modify
+        ///  the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            SuspendLayout();
+            // 
+            // Form1
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1514, 755);
+            Margin = new Padding(2, 2, 2, 2);
+            Name = "Form1";
+            Text = "Book Store";
+            ResumeLayout(false);
+        }
+
+        #endregion
     }
-
-    #endregion
-  }
 }

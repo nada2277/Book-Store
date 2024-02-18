@@ -1,202 +1,206 @@
-
-
-
 using Autofac;
 using BookStore.Application.Services;
 using BookStore.Models;
-using System;
 using System.Runtime.InteropServices;
-using System.Windows.Forms;
 using Test.Presentation.AutoFag;
+
 
 namespace BookStore.User.Forms
 {
-
-  public partial class HomeForm : Form
-  {
-    private Form activeForm = new Form();
-    private BooksForm booksForm;
-    private CartForm cartForm = new CartForm();
-    private OrdersForm ordersForm = new OrdersForm();
-    private CategoriesForm categoriesForm = new CategoriesForm();
-    private SettingForm settingForm = new SettingForm();
-    Form1 mainForm;
-
-    Customer customer;
-    int pageNum;
-    int maxPageNum;
-    IContainer connectionBook;
-    IBookService BookService;
-
-    public HomeForm(Customer _customer, Form1 form)
+    public partial class HomeForm : Form
     {
-      InitializeComponent();
+        Form activeForm = new Form();
+        BooksForm booksForm;
+        CartForm cartForm;
+        EmptyCart emptyCart;
 
-      mainForm = form;
+        OrdersForm ordersForm = new OrdersForm();
+        CategoriesForm categoriesForm;
+        OneCategoryForm oneCategoryForm;
+        Customer customer;
+        SettingForm settingForm;
+        Form1 mainForm;
+        IContainer connectionCustomer;
+        ICustomerService CustomerService;
+        public HomeForm(Customer _customer, Form1 form)
+        {
+            InitializeComponent();
 
-      connectionBook = AutoFag.RegisterBook();
-      BookService = connectionBook.Resolve<IBookService>();
-      customer = _customer;
+            connectionCustomer = AutoFag.RegisterCustomer();
+            CustomerService = connectionCustomer.Resolve<ICustomerService>();
 
-      pageNum = 1;
-      maxPageNum = BookService.GetCount();
-      booksForm = new BooksForm(BookService.GetAllPagination(10, pageNum), customer.Id);
-      prevBtn.Visible = false;
+            mainForm = form;
+            customer = _customer;
 
-      fnameLabel.Text = customer.FirstName[0].ToString().ToUpper() + customer.FirstName[1..];
+            settingForm = new SettingForm(customer , this);
 
-      pictureBox1.BackgroundImage = Image.FromFile(Path.GetFullPath($"..\\..\\..\\Images\\{customer.ProfilePic}"));
 
-      if (!customer.ProfilePic.Equals("profilePicture.png"))
-        pictureBox1.BackColor = Color.Transparent;
+            booksForm = new BooksForm(customer.Id);
+            emptyCart = new EmptyCart(this);
+            categoriesForm = new CategoriesForm(this);
 
-      pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
+            OpenForm(booksForm, this);
+            #region Header
+            fnameLabel.Text = customer.FirstName[0].ToString().ToUpper() + customer.FirstName[1..];
+            pictureBox1.BackgroundImage = Image.FromFile(Path.GetFullPath($"..\\..\\..\\Images\\{customer.ProfilePic}"));
+            //pictureBox1.BackgroundImage = Image.FromFile(Path.GetFullPath(customer.ProfilePic));
 
-      System.Drawing.Drawing2D.GraphicsPath graphicsPath = new();
+            if (!customer.ProfilePic.Equals("profilePicture.png"))
+                pictureBox1.BackColor = Color.Transparent;
+            pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
+            //round Img
+            System.Drawing.Drawing2D.GraphicsPath graphicsPath = new();
+            graphicsPath.AddEllipse(0, 0, pictureBox1.Width, pictureBox1.Height);
+            Region region = new Region(graphicsPath);
+            pictureBox1.Region = region;
+            searchPanel.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, searchPanel.Width, searchPanel.Height, 50, 50));
+            #endregion
+            button1.BackColor = Color.FromArgb(157, 178, 191);
+        }
 
-      graphicsPath.AddEllipse(0, 0, pictureBox1.Width, pictureBox1.Height);
+        private void ActivateBtn(object btnSender)
+        {
+            DisableActiveBtn();
+            if (btnSender is Button button)
+            {
+                button.BackColor = Color.FromArgb(157, 178, 191);
+            }
+        }
 
-      Region region = new Region(graphicsPath);
-      pictureBox1.Region = region;
-      OpenForm(booksForm, this);
-      button1.BackColor = Color.FromArgb(157, 178, 191);
+        private void DisableActiveBtn()
+        {
+            foreach (Control btn in panelMenu.Controls)
+                if (btn.GetType() == typeof(Button))
+                    btn.BackColor = Color.FromArgb(82, 109, 130);
+        }
 
-      searchPanel.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, searchPanel.Width, searchPanel.Height, 50, 50));
+        private void OpenForm(Form form, object sender)
+        {
+            ActivateBtn(sender);
+            if (activeForm == form)
+                return;
+            activeForm = form;
+            form.TopLevel = false;
+            form.FormBorderStyle = FormBorderStyle.None;
+            form.Dock = DockStyle.Fill;
+            this.DesktopPanel.Controls.Add(form);
+            this.DesktopPanel.Tag = form;
+            form.BringToFront();
+            form.Show();
+        }
+
+        public void ShowBooks()
+        {
+            OpenForm(booksForm, this);
+            button1.BackColor = Color.FromArgb(157, 178, 191);
+
+        }
+
+        public void ShowEmptyCart()
+        {
+            OpenForm(emptyCart, this);
+            button4.BackColor = Color.FromArgb(157, 178, 191);
+
+
+        }
+        public void ShowCat(string str)
+        {
+            oneCategoryForm = new OneCategoryForm(customer.Id, str);
+            OpenForm(oneCategoryForm, this);
+            button2.BackColor = Color.FromArgb(157, 178, 191);
+
+        }
+
+
+        private void button1_Click(object sender, EventArgs e) =>
+          OpenForm(booksForm, sender);
+
+        private void button2_Click(object sender, EventArgs e) =>
+          OpenForm(categoriesForm, sender);
+
+        private void button3_Click(object sender, EventArgs e) =>
+          OpenForm(ordersForm, sender);
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (CustomerService.HasItemInCart(customer.Id))
+            {
+                cartForm = new CartForm(customer.Id, this);
+                OpenForm(cartForm, sender);
+            }
+            else
+                OpenForm(emptyCart, this);
+            button4.BackColor = Color.FromArgb(157, 178, 191);
+
+        }
+
+        //private void button4_Click(object sender, EventArgs e)=>
+        //  OpenForm(new CartForm(customer.Id, this), sender);
+
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            mainForm.ShowLogin();
+
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            if (CustomerService.HasItemInCart(customer.Id))
+            {
+                cartForm = new CartForm(customer.Id, this);
+                OpenForm(cartForm, sender);
+            }
+            else
+                OpenForm(emptyCart, this);
+            button4.BackColor = Color.FromArgb(157, 178, 191);
+        }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+            OpenForm(ordersForm, sender);
+            button3.BackColor = Color.FromArgb(157, 178, 191);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            OpenForm(settingForm, sender);
+            button5.BackColor = Color.FromArgb(157, 178, 191);
+        }
+
+        private void button5_Click(object sender, EventArgs e) =>
+          OpenForm(settingForm, sender);
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBoxSearch.Text))
+                return;
+            SearchForm SearchForm = new SearchForm(customer.Id, textBoxSearch.Text);
+            OpenForm(SearchForm, sender);
+        }
+
+
+        public void UpdateProfilePicture(string profilePicPath)
+        {
+            pictureBox1.BackgroundImage = Image.FromFile(Path.GetFullPath($"..\\..\\..\\Images\\{profilePicPath}"));
+            if (!profilePicPath.Equals("profilePicture.png"))
+                pictureBox1.BackColor = Color.Transparent;
+        }
+
+
+
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn
+            (
+                int nLeftRect,     // x-coordinate of upper-left corner
+                int nTopRect,      // y-coordinate of upper-left corner
+                int nRightRect,    // x-coordinate of lower-right corner
+                int nBottomRect,   // y-coordinate of lower-right corner
+                int nWidthEllipse, // width of ellipse
+                int nHeightEllipse // height of ellipse
+            );
+
     }
-
-    private void ActivateBtn(object btnSender)
-    {
-      DisableActiveBtn();
-      if (btnSender is Button button)
-      {
-        button.BackColor = Color.FromArgb(157, 178, 191);
-      }
-    }
-
-    private void DisableActiveBtn()
-    {
-      foreach (Control btn in panelMenu.Controls)
-        if (btn.GetType() == typeof(Button))
-          btn.BackColor = Color.FromArgb(82, 109, 130);
-    }
-
-    private void OpenForm(Form form, object sender)
-    {
-      ActivateBtn(sender);
-      if (activeForm == form)
-        return;
-      activeForm = form;
-      form.TopLevel = false;
-      form.FormBorderStyle = FormBorderStyle.None;
-      form.Dock = DockStyle.Fill;
-      this.DesktopPanel.Controls.Add(form);
-      this.DesktopPanel.Tag = form;
-      form.BringToFront();
-      form.Show();
-      //Headerlabel.Text = form.Text;
-
-    }
-
-    [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
-    private static extern IntPtr CreateRoundRectRgn
-        (
-            int nLeftRect,     // x-coordinate of upper-left corner
-            int nTopRect,      // y-coordinate of upper-left corner
-            int nRightRect,    // x-coordinate of lower-right corner
-            int nBottomRect,   // y-coordinate of lower-right corner
-            int nWidthEllipse, // width of ellipse
-            int nHeightEllipse // height of ellipse
-        );
-
-    private void button1_Click(object sender, EventArgs e) =>
-      OpenForm(booksForm, sender);
-
-
-    private void button2_Click(object sender, EventArgs e) =>
-      OpenForm(categoriesForm, sender);
-
-    private void button3_Click(object sender, EventArgs e) =>
-      OpenForm(ordersForm, sender);
-
-    private void button4_Click(object sender, EventArgs e) =>
-      OpenForm(cartForm, sender);
-
-    private void prevBtn_Click(object sender, EventArgs e)
-    {
-      pageNum--;
-      if (pageNum == 1)
-      {
-        prevBtn.Visible = false;
-        nextBtn.Visible = true;
-      }
-      else if (pageNum == maxPageNum) 
-      {
-        prevBtn.Visible = true;
-        nextBtn.Visible = false;
-      }
-      else
-      {
-        prevBtn.Visible = true;
-        nextBtn.Visible = true;
-      }
-
-      booksForm = new BooksForm(BookService.GetAllPagination(10, pageNum), customer.Id);
-      OpenForm(booksForm, this);
-
-    }
-
-    private void nextBtn_Click(object sender, EventArgs e)
-    {
-      pageNum++;
-      if (pageNum == maxPageNum)
-      {
-        prevBtn.Visible = true;
-        nextBtn.Visible = false;
-      }
-      else if(pageNum == 1)
-      {
-        prevBtn.Visible = false;
-        nextBtn.Visible = true;
-      }
-      else
-      {
-        prevBtn.Visible = true;
-        nextBtn.Visible = true;
-      }
-
-      booksForm = new BooksForm(BookService.GetAllPagination(10, pageNum), customer.Id);
-      OpenForm(booksForm, this);
-
-    }
-
-    private void button6_Click(object sender, EventArgs e)
-    {
-      this.Close();
-      mainForm.ShowLogin();
-
-    }
-
-    private void pictureBox3_Click(object sender, EventArgs e)
-    {
-      OpenForm(cartForm, sender);
-      button4.BackColor = Color.FromArgb(157, 178, 191);
-    }
-
-    private void pictureBox4_Click(object sender, EventArgs e)
-    {
-      OpenForm(ordersForm, sender);
-      button3.BackColor = Color.FromArgb(157, 178, 191);
-    }
-
-    private void pictureBox1_Click(object sender, EventArgs e)
-    {
-      OpenForm(settingForm, sender);
-      button5.BackColor = Color.FromArgb(157, 178, 191);
-    }
-
-    private void button5_Click(object sender, EventArgs e)=>
-      OpenForm(settingForm, sender);
-    
-  }
 
 }

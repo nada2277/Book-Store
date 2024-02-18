@@ -362,3 +362,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /BookStore.Admin/BookStore.Admin.csproj
+/BookStore.User/Forms/BooksForm.cs
+/BookStore.User/Forms/BooksForm.cs

@@ -1,46 +1,65 @@
 ﻿using BookStore.Application.Contracts;
 using BookStore.Context;
+using BookStore.DTOs;
 using BookStore.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace BookStore.Infrastructure.Repositories
 {
-    public class CartItemRepository : Repository<CartItem, int>, ICartItemRepository
+  public class CartItemRepository : Repository<CartItem, int>, ICartItemRepository
+  {
+    BookStoreContext context;
+    public CartItemRepository(BookStoreContext _bookStoreContext) : base(_bookStoreContext)
     {
-        BookStoreContext context;
-        public CartItemRepository(BookStoreContext _bookStoreContext) : base(_bookStoreContext)
-        {
-            context = _bookStoreContext;
-        }
-
-        public bool ChangeQuantity(CartItem cartItem, int quantity)
-        {
-            if (cartItem == null)
-                return false;
-
-            // Retrieve the associated book
-            var book = context.books.FirstOrDefault(b => b.Id == cartItem.BookID);
-            if (book == null)
-                return false; 
-
-            // Calculate the new quantity after adding the provided quantity
-            int newQuantity = cartItem.Quantity + quantity;
-
-            // Ensure the resulting quantity is not negative and does not exceed available stock
-            if (newQuantity < 0 || newQuantity > book.Stock)
-                return false; 
-
-            // Update the quantity of the cart item
-            cartItem.Quantity = newQuantity;
-
-            context.SaveChanges();
-
-            return true; 
-        }
+      context = _bookStoreContext;
     }
+
+    public bool ChangeQuantity(int cartItemId, int quantity)
+    {
+    
+
+      // Retrieve the associated book
+      var item = context.cartItems.FirstOrDefault(i => i.Id == cartItemId);
+
+      if (item == null)
+        return false;
+
+      if (quantity == 0)
+        Delete(item);
+      else 
+      {
+        item.Quantity = quantity;
+        Update(item);
+      }
+
+      context.SaveChanges();
+
+      return true;
+    }
+    public IQueryable<BookCart> GetCustomerCart(int customerId)
+    {
+      return from item in context.cartItems
+             where item.CustomerID == customerId
+             join book in context.books
+             on item.BookID equals book.Id
+             select new BookCart
+             {
+               BookId = book.Id,
+               CartItemId = item.Id,
+               Title = book.Name,
+               Price = book.Price,
+               Quantity = item.Quantity,
+               Stock = book.Stock,
+               Image = book.BookImg
+             };
+    }
+  }
 }

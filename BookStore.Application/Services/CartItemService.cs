@@ -1,4 +1,5 @@
 ﻿using BookStore.Application.Contracts;
+using BookStore.DTOs;
 using BookStore.Models;
 using System;
 using System.Collections.Generic;
@@ -25,9 +26,9 @@ namespace BookStore.Application.Services
         _CartItemRepository.Save();
       return isAdded;
     }
-    public bool ChangeItemQuantity(CartItem CartItem, int quantity)
+    public bool ChangeItemQuantity(int CartItemid, int quantity)
     {
-      bool isUpdated = _CartItemRepository.ChangeQuantity(CartItem,quantity);
+      bool isUpdated = _CartItemRepository.ChangeQuantity(CartItemid, quantity);
       if (isUpdated)
         _CartItemRepository.Save();
       return isUpdated;
@@ -48,6 +49,10 @@ namespace BookStore.Application.Services
         _CartItemRepository.Save();
       return isUpdated;
     }
+
+    public List<BookCart> BookCartItems(int CustomerId)=>
+       _CartItemRepository.GetCustomerCart(CustomerId).ToList();
+    
   }
 
 

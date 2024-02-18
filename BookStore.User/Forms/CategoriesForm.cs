@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookStore.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,11 +11,38 @@ using System.Windows.Forms;
 
 namespace BookStore.User.Forms
 {
-  public partial class CategoriesForm : Form
-  {
-    public CategoriesForm()
+    public partial class CategoriesForm : Form
     {
-      InitializeComponent();
+        HomeForm HomeForm;
+        public CategoriesForm(HomeForm homeForm)
+        {
+            InitializeComponent();
+            this.HomeForm = homeForm;
+        }
+
+        private void code_Click(object sender, EventArgs e)
+        {
+            HomeForm.ShowCat("code");
+        }
+
+        private void Fiction_Click(object sender, EventArgs e)
+        {
+            HomeForm.ShowCat("Fiction");
+        }
+
+        private void Suspense_Click(object sender, EventArgs e)
+        {
+            HomeForm.ShowCat("Suspense");
+        }
+
+        private void Beauty_Click(object sender, EventArgs e)
+        {
+            HomeForm.ShowCat("Beauty");
+        }
+        private void Science_Click(object sender, EventArgs e)
+        {
+            HomeForm.ShowCat("Science"); 
+        }
+
     }
-  }
 }
