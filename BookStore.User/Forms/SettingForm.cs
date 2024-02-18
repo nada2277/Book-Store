@@ -20,10 +20,18 @@ namespace BookStore.User.Forms
         private const string PlaceholderTextLN = "Enter Last Name";
         private const string PlaceholderTextPH = "Enter Phone";
         private const string PlaceholderTextADD = "Enter Address";
+        private const string PlaceholderTextUS = "Enter UserName";
+        private const string PlaceholderTextEm = "Enter Email";
+        private const string PlaceholderTextPass = "Enter Current Password";
+        private const string PlaceholderTextPasscon = "Enter New  Password";
 
 
         Customer customer;
-      
+
+
+
+
+
         public SettingForm(Customer _customer)
         {
             InitializeComponent();
@@ -31,33 +39,18 @@ namespace BookStore.User.Forms
             //PlaceHolders:
             InitializeTextBox();
 
+
             //Pic of Profile : 
             customer = _customer;
+            SetProfilePicture();
 
-            var connectionCustomer = AutoFag.RegisterCustomer();
-            ICustomerService CustomerService = connectionCustomer.Resolve<ICustomerService>();
-
-            string imagePath = Path.GetFullPath($"..\\..\\..\\Images\\{customer.ProfilePic}");
-
-            Image image = Image.FromFile(imagePath);
-
-            // Make image rounded
-            Bitmap roundedImage = new Bitmap(image.Width, image.Height);
-            using (Graphics graphics = Graphics.FromImage(roundedImage))
-            {
-                graphics.Clear(Color.Transparent);
-                graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-                graphics.FillEllipse(new TextureBrush(image), 0, 0, image.Width, image.Height);
-
-
-                // Assign rounded image to PictureBox
-                pictureBox1.Image = roundedImage;
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            }
 
             //Responsive In WINDOW:
             //this.Resize += Form1_Resize;
 
+
+
+            //
 
         }
 
@@ -70,18 +63,36 @@ namespace BookStore.User.Forms
             textBox2.Text = PlaceholderTextLN;
             textBox3.Text = PlaceholderTextPH;
             textBox4.Text = PlaceholderTextADD;
+            textBox5.Text = PlaceholderTextUS;
+            textBox6.Text = PlaceholderTextEm;
+            textBox7.Text = PlaceholderTextPass;
+            textBox8.Text = PlaceholderTextPasscon;
 
             SetPlaceholder(textBox1);
             SetPlaceholder(textBox2);
             SetPlaceholder(textBox3);
             SetPlaceholder(textBox4);
+            SetPlaceholder(textBox5);
+            SetPlaceholder(textBox6);
+            SetPlaceholder(textBox7);
+            SetPlaceholder(textBox8);
         }
         private void SetPlaceholder(TextBox textBox)
         {
-            textBox.ForeColor = System.Drawing.SystemColors.GrayText;
+            textBox.Font = new Font(textBox.Font.FontFamily, 12f, FontStyle.Regular); // Adjust the font size (12f) as needed
+            textBox.ForeColor = SystemColors.GrayText;
             textBox.Enter += TextBox_Enter;
             textBox.Leave += TextBox_Leave;
+
+            // Calculate the vertical padding to center the placeholder text vertically
+            int verticalPadding = (textBox.Height - (int)textBox.Font.GetHeight()) / 2;
+            textBox.Padding = new Padding(5, verticalPadding, 0, 0); // Adjust the left padding as needed
+
+            // Set the TextAlign property to align text to the left
+            textBox.TextAlign = HorizontalAlignment.Left;
         }
+
+
 
         private void TextBox_Enter(object sender, EventArgs e)
         {
@@ -115,6 +126,14 @@ namespace BookStore.User.Forms
                     return PlaceholderTextPH;
                 case "textBox4":
                     return PlaceholderTextADD;
+                case "textBox5":
+                    return PlaceholderTextUS;
+                case "textBox6":
+                    return PlaceholderTextEm;
+                case "textBox7":
+                    return PlaceholderTextPass;
+                case "textBox8":
+                    return PlaceholderTextPasscon;
                 default:
                     return "";
             }
@@ -122,6 +141,32 @@ namespace BookStore.User.Forms
 
         #endregion
 
+        #region Pic :
+
+
+        private void SetProfilePicture()
+        {
+            var connectionCustomer = AutoFag.RegisterCustomer();
+            ICustomerService CustomerService = connectionCustomer.Resolve<ICustomerService>();
+
+            string imagePath = Path.GetFullPath($"..\\..\\..\\Images\\{customer.ProfilePic}");
+
+            Image image = Image.FromFile(imagePath);
+
+            // Make image rounded
+            Bitmap roundedImage = new Bitmap(image.Width, image.Height);
+            using (Graphics graphics = Graphics.FromImage(roundedImage))
+            {
+                graphics.Clear(Color.Transparent);
+                graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                graphics.FillEllipse(new TextureBrush(image), 0, 0, image.Width, image.Height);
+
+                // Assign rounded image to PictureBox
+                pictureBox1.Image = roundedImage;
+                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
+        }
+        #endregion
 
         #region Layout Of Page : 
 
