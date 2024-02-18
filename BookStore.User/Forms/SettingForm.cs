@@ -9,12 +9,15 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Test.Presentation.AutoFag;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using Button = System.Windows.Forms.Button;
 using TextBox = System.Windows.Forms.TextBox;
 
@@ -58,9 +61,6 @@ namespace BookStore.User.Forms
             //this.Resize += Form1_Resize;
 
 
-
-            //Validations :
-            this.mainForm = (Form1)mainForm;
 
 
         }
@@ -152,7 +152,7 @@ namespace BookStore.User.Forms
 
         #endregion
 
-        #region Pic :
+        #region Current Pic :
 
 
         private void SetProfilePicture()
@@ -160,7 +160,7 @@ namespace BookStore.User.Forms
             var connectionCustomer = AutoFag.RegisterCustomer();
             ICustomerService CustomerService = connectionCustomer.Resolve<ICustomerService>();
 
-            string imagePath = Path.GetFullPath($"..\\..\\..\\Images\\{customer.ProfilePic}");
+            string imagePath = Path.GetFullPath(customer.ProfilePic);
 
             Image image = Image.FromFile(imagePath);
 
@@ -227,11 +227,7 @@ namespace BookStore.User.Forms
 
 
         #region Validations :
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            mainForm.ShowLogin();
-            this.Close();
-        }
+   
 
 
         private void button1_Click(object sender, EventArgs e)
@@ -246,6 +242,7 @@ namespace BookStore.User.Forms
             string username = textBox5.Text;
             string email = textBox6.Text.Trim();
             string password = textBox7.Text;
+            string newpassword = textBox8.Text;
 
             // Reset validation labels
             lblFirstNameError.Text = "";
@@ -255,11 +252,12 @@ namespace BookStore.User.Forms
             lblUsernameError.Text = "";
             lblEmailError.Text = "";
             lblPasswordError.Text = "";
+            lblNewPasswordError.Text = "";
 
             // Validation
             bool isValid = true;
 
-            if (string.IsNullOrEmpty(firstName))
+            if (firstName == PlaceholderTextFN )
             {
                 lblFirstNameError.Text = "First name is required";
                 lblFirstNameError.ForeColor = Color.Red;
@@ -267,7 +265,7 @@ namespace BookStore.User.Forms
                 isValid = false;
             }
 
-            if (string.IsNullOrEmpty(lastName))
+            if (lastName == PlaceholderTextLN)
             {
                 lblLastNameError.Text = "Last name is required";
                 lblLastNameError.ForeColor = Color.Red;
@@ -276,7 +274,7 @@ namespace BookStore.User.Forms
             }
 
 
-            if (string.IsNullOrEmpty(phone))
+            if (phone == PlaceholderTextPH)
             {
                 lblPhoneError.Text = "Phone is required";
                 lblPhoneError.ForeColor = Color.Red;
@@ -299,7 +297,7 @@ namespace BookStore.User.Forms
             }
 
 
-            if (string.IsNullOrEmpty(address))
+            if (address == PlaceholderTextADD)
             {
                 lblAddressError.Text = "Address is required";
                 lblAddressError.ForeColor = Color.Red;
@@ -307,7 +305,7 @@ namespace BookStore.User.Forms
                 isValid = false;
             }
 
-            if (string.IsNullOrEmpty(username))
+            if (username == PlaceholderTextUS)
             {
                 lblUsernameError.Text = "Username is required";
                 lblUsernameError.ForeColor = Color.Red;
@@ -325,7 +323,7 @@ namespace BookStore.User.Forms
 
 
 
-            if (string.IsNullOrEmpty(email))
+            if (email == PlaceholderTextEm)
             {
                 lblEmailError.Text = "Email is required";
                 lblEmailError.ForeColor = Color.Red;
@@ -350,15 +348,13 @@ namespace BookStore.User.Forms
 
 
 
-            if (string.IsNullOrEmpty(password))
+            if (password == PlaceholderTextPass)
             {
                 lblPasswordError.Text = "Current Password is required";
                 lblPasswordError.ForeColor = Color.Red;
 
                 isValid = false;
-            }
-
-            if (!CustomerService.IsUsrPassExisit(password))
+            }else if (!CustomerService.IsUsrPassExisit(password))
             {
                 lblPasswordError.Text = "Current Password Does not Exist";
                 lblPasswordError.ForeColor = Color.Red;
@@ -367,29 +363,57 @@ namespace BookStore.User.Forms
             }
 
 
+            if (newpassword == PlaceholderTextPasscon)
+            {
+                lblNewPasswordError.Text = "New Password is required";
+                lblNewPasswordError.ForeColor = Color.Red;
+
+                isValid = false;
+            }
+
             if (!isValid)
                 return;
 
+            customer.FirstName = firstName;
+            customer.LastName = lastName;
+            customer.Email = email;
+            customer.UserName = username;
+            customer.Password = newpassword;
+            customer.Phone = phone;
+            customer.Address = address;
+            customer.IsAdmin = false;
+            customer.ProfilePic = PathProfilePic;
 
-            Customer newCustomer = new Customer
-            {
-                FirstName = firstName,
-                LastName = lastName,
-                Email = email,
-                UserName = username,
-                Password = password,
-                Phone = phone,
-                Address = address,
-                IsAdmin = false,
-                ProfilePic = PathProfilePic
-            };
-
-            bool success = CustomerService.UpdateCustomer(newCustomer);
+            bool success = CustomerService.UpdateCustomer(customer);
 
             if (success)
             {
-                this.Close();
-                mainForm.ShowLogin();
+                // Reset all fields
+                textBox1.Text = PlaceholderTextFN;
+                textBox2.Text = PlaceholderTextLN;
+                textBox3.Text = PlaceholderTextPH;
+                textBox4.Text = PlaceholderTextADD;
+                textBox5.Text = PlaceholderTextUS;
+                textBox6.Text = PlaceholderTextEm;
+                textBox7.Text = PlaceholderTextPass;
+                textBox8.Text = PlaceholderTextPasscon;
+
+
+                SetPlaceholder(textBox1);
+                SetPlaceholder(textBox2);
+                SetPlaceholder(textBox3);
+                SetPlaceholder(textBox4);
+                SetPlaceholder(textBox5);
+                SetPlaceholder(textBox6);
+                SetPlaceholder(textBox7);
+                SetPlaceholder(textBox8);
+
+
+                MessageBox.Show("Profile updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Failed to update profile. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
 
@@ -418,8 +442,7 @@ namespace BookStore.User.Forms
         #endregion
 
 
-
-
+        #region Uploding New Pic :
         private void button2_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -460,6 +483,8 @@ namespace BookStore.User.Forms
             button.Region = new Region(path);
         }
 
+
+        #endregion
 
 
     }

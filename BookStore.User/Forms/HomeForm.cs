@@ -42,7 +42,8 @@ namespace BookStore.User.Forms
             OpenForm(booksForm, this);
             #region Header
             fnameLabel.Text = customer.FirstName[0].ToString().ToUpper() + customer.FirstName[1..];
-            pictureBox1.BackgroundImage = Image.FromFile(Path.GetFullPath($"..\\..\\..\\Images\\{customer.ProfilePic}"));
+            //pictureBox1.BackgroundImage = Image.FromFile(Path.GetFullPath($"..\\..\\..\\Images\\{customer.ProfilePic}"));
+            pictureBox1.BackgroundImage = Image.FromFile(Path.GetFullPath(customer.ProfilePic));
 
             if (!customer.ProfilePic.Equals("profilePicture.png"))
                 pictureBox1.BackColor = Color.Transparent;

@@ -48,6 +48,7 @@
             lblAddressError = new Label();
             lblPhoneError = new Label();
             button2 = new Button();
+            lblNewPasswordError = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -228,6 +229,14 @@
             button2.UseVisualStyleBackColor = false;
             button2.Click += button2_Click;
             // 
+            // lblNewPasswordError
+            // 
+            lblNewPasswordError.AutoSize = true;
+            lblNewPasswordError.Location = new Point(684, 490);
+            lblNewPasswordError.Name = "lblNewPasswordError";
+            lblNewPasswordError.Size = new Size(0, 15);
+            lblNewPasswordError.TabIndex = 21;
+            // 
             // SettingForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -235,6 +244,7 @@
             AutoScroll = true;
             BackColor = SystemColors.ControlLightLight;
             ClientSize = new Size(987, 631);
+            Controls.Add(lblNewPasswordError);
             Controls.Add(button2);
             Controls.Add(lblPhoneError);
             Controls.Add(lblAddressError);
@@ -285,5 +295,6 @@
         private Label lblAddressError;
         private Label lblPhoneError;
         private Button button2;
+        private Label lblNewPasswordError;
     }
 }
