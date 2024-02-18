@@ -14,6 +14,9 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Test.Presentation.AutoFag;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Button = System.Windows.Forms.Button;
+using TextBox = System.Windows.Forms.TextBox;
 
 namespace BookStore.User.Forms
 {
@@ -28,6 +31,7 @@ namespace BookStore.User.Forms
         private const string PlaceholderTextPass = "Enter Current Password";
         private const string PlaceholderTextPasscon = "Enter New  Password";
 
+        private string PathProfilePic;
 
         Customer customer;
 
@@ -239,10 +243,9 @@ namespace BookStore.User.Forms
             string lastName = textBox2.Text.Trim();
             string phone = textBox3.Text.Trim();
             string address = textBox4.Text.Trim();
-            string username = textBox5.Text.Trim();
+            string username = textBox5.Text;
             string email = textBox6.Text.Trim();
             string password = textBox7.Text;
-            string newPassword = textBox8.Text;
 
             // Reset validation labels
             lblFirstNameError.Text = "";
@@ -252,7 +255,6 @@ namespace BookStore.User.Forms
             lblUsernameError.Text = "";
             lblEmailError.Text = "";
             lblPasswordError.Text = "";
-            lblNewPasswordError.Text = "";
 
             // Validation
             bool isValid = true;
@@ -260,81 +262,110 @@ namespace BookStore.User.Forms
             if (string.IsNullOrEmpty(firstName))
             {
                 lblFirstNameError.Text = "First name is required";
+                lblFirstNameError.ForeColor = Color.Red;
+
                 isValid = false;
             }
 
             if (string.IsNullOrEmpty(lastName))
             {
                 lblLastNameError.Text = "Last name is required";
-                isValid = false;
-            }
+                lblLastNameError.ForeColor = Color.Red;
 
-            if (string.IsNullOrEmpty(email))
-            {
-                lblEmailError.Text = "Email is required";
                 isValid = false;
             }
-            else if (!IsValidEmail(email))
-            {
-                lblEmailError.Text = "Invalid email format";
-                isValid = false;
-            }
-            else if (CustomerService.IsUsrEmailExisit(email))
-            {
-                lblEmailError.Text = "Sorry This email Is Exisited";
-                isValid = false;
-            }
-
-
-            if (string.IsNullOrEmpty(username))
-            {
-                lblUsernameError.Text = "Username is required";
-                isValid = false;
-            }
-            else if (CustomerService.IsUsrNameExisit(username))
-            {
-                lblUsernameError.Text = "Sorry this username is exisited";
-                isValid = false;
-            }
-
-
-            if (string.IsNullOrEmpty(password))
-            {
-                lblPasswordError.Text = "Current Password is required";
-                isValid = false;
-            }
-
-            if (!CustomerService.IsUsrPassExisit(password))
-            {
-                lblNewPasswordError.Text = "Current Password Does not Exist";
-                isValid = false;
-            }
-
 
 
             if (string.IsNullOrEmpty(phone))
             {
                 lblPhoneError.Text = "Phone is required";
+                lblPhoneError.ForeColor = Color.Red;
+
                 isValid = false;
             }
             else if (!IsValidPhone(phone))
             {
                 lblPhoneError.Text = "Invalid phone format";
+                lblPhoneError.ForeColor = Color.Red;
+
                 isValid = false;
             }
             else if (CustomerService.IsUsrPhoneExisit(phone))
             {
                 lblPhoneError.Text = "Sorry this phone is exisited";
+                lblPhoneError.ForeColor = Color.Red;
+
                 isValid = false;
             }
-
 
 
             if (string.IsNullOrEmpty(address))
             {
                 lblAddressError.Text = "Address is required";
+                lblAddressError.ForeColor = Color.Red;
+
                 isValid = false;
             }
+
+            if (string.IsNullOrEmpty(username))
+            {
+                lblUsernameError.Text = "Username is required";
+                lblUsernameError.ForeColor = Color.Red;
+
+                isValid = false;
+            }
+            else if (CustomerService.IsUsrNameExisit(username))
+            {
+                lblUsernameError.Text = "Sorry this username is exisited";
+                lblUsernameError.ForeColor = Color.Red;
+
+                isValid = false;
+            }
+
+
+
+
+            if (string.IsNullOrEmpty(email))
+            {
+                lblEmailError.Text = "Email is required";
+                lblEmailError.ForeColor = Color.Red;
+
+                isValid = false;
+            }
+            else if (!IsValidEmail(email))
+            {
+                lblEmailError.Text = "Invalid email format";
+                lblEmailError.ForeColor = Color.Red;
+
+                isValid = false;
+            }
+            else if (CustomerService.IsUsrEmailExisit(email))
+            {
+                lblEmailError.Text = "Sorry This email Is Exisited";
+                lblEmailError.ForeColor = Color.Red;
+
+                isValid = false;
+            }
+
+
+
+
+            if (string.IsNullOrEmpty(password))
+            {
+                lblPasswordError.Text = "Current Password is required";
+                lblPasswordError.ForeColor = Color.Red;
+
+                isValid = false;
+            }
+
+            if (!CustomerService.IsUsrPassExisit(password))
+            {
+                lblPasswordError.Text = "Current Password Does not Exist";
+                lblPasswordError.ForeColor = Color.Red;
+
+                isValid = false;
+            }
+
 
             if (!isValid)
                 return;
@@ -350,7 +381,7 @@ namespace BookStore.User.Forms
                 Phone = phone,
                 Address = address,
                 IsAdmin = false,
-                ProfilePic = "profilePicture.png"
+                ProfilePic = PathProfilePic
             };
 
             bool success = CustomerService.UpdateCustomer(newCustomer);
@@ -403,7 +434,7 @@ namespace BookStore.User.Forms
 
                     // Assign the selected image to the PictureBox
                     pictureBox1.Image = selectedImage;
-                    customer.ProfilePic = selectedImagePath;
+                    PathProfilePic = selectedImagePath;
                 }
                 catch (Exception ex)
                 {
@@ -411,8 +442,6 @@ namespace BookStore.User.Forms
                 }
             }
         }
-
-
 
         private void SetRoundedButton(Button button)
         {

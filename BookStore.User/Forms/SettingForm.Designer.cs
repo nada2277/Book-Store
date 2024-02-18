@@ -47,7 +47,6 @@
             lblUsernameError = new Label();
             lblAddressError = new Label();
             lblPhoneError = new Label();
-            lblNewPasswordError = new Label();
             button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -161,7 +160,7 @@
             // lblFirstNameError
             // 
             lblFirstNameError.AutoSize = true;
-            lblFirstNameError.Location = new Point(335, 174);
+            lblFirstNameError.Location = new Point(335, 160);
             lblFirstNameError.Name = "lblFirstNameError";
             lblFirstNameError.Size = new Size(0, 15);
             lblFirstNameError.TabIndex = 12;
@@ -169,7 +168,7 @@
             // lblLastNameError
             // 
             lblLastNameError.AutoSize = true;
-            lblLastNameError.Location = new Point(684, 174);
+            lblLastNameError.Location = new Point(684, 160);
             lblLastNameError.Name = "lblLastNameError";
             lblLastNameError.Size = new Size(0, 15);
             lblLastNameError.TabIndex = 13;
@@ -177,7 +176,7 @@
             // lblPasswordError
             // 
             lblPasswordError.AutoSize = true;
-            lblPasswordError.Location = new Point(335, 506);
+            lblPasswordError.Location = new Point(335, 490);
             lblPasswordError.Name = "lblPasswordError";
             lblPasswordError.Size = new Size(0, 15);
             lblPasswordError.TabIndex = 14;
@@ -185,7 +184,7 @@
             // lblEmailError
             // 
             lblEmailError.AutoSize = true;
-            lblEmailError.Location = new Point(684, 396);
+            lblEmailError.Location = new Point(684, 378);
             lblEmailError.Name = "lblEmailError";
             lblEmailError.Size = new Size(0, 15);
             lblEmailError.TabIndex = 15;
@@ -193,7 +192,7 @@
             // lblUsernameError
             // 
             lblUsernameError.AutoSize = true;
-            lblUsernameError.Location = new Point(335, 396);
+            lblUsernameError.Location = new Point(335, 378);
             lblUsernameError.Name = "lblUsernameError";
             lblUsernameError.Size = new Size(0, 15);
             lblUsernameError.TabIndex = 16;
@@ -201,7 +200,7 @@
             // lblAddressError
             // 
             lblAddressError.AutoSize = true;
-            lblAddressError.Location = new Point(684, 287);
+            lblAddressError.Location = new Point(684, 275);
             lblAddressError.Name = "lblAddressError";
             lblAddressError.Size = new Size(0, 15);
             lblAddressError.TabIndex = 17;
@@ -209,18 +208,10 @@
             // lblPhoneError
             // 
             lblPhoneError.AutoSize = true;
-            lblPhoneError.Location = new Point(335, 287);
+            lblPhoneError.Location = new Point(335, 275);
             lblPhoneError.Name = "lblPhoneError";
             lblPhoneError.Size = new Size(0, 15);
             lblPhoneError.TabIndex = 18;
-            // 
-            // lblNewPasswordError
-            // 
-            lblNewPasswordError.AutoSize = true;
-            lblNewPasswordError.Location = new Point(684, 506);
-            lblNewPasswordError.Name = "lblNewPasswordError";
-            lblNewPasswordError.Size = new Size(0, 15);
-            lblNewPasswordError.TabIndex = 19;
             // 
             // button2
             // 
@@ -245,7 +236,6 @@
             BackColor = SystemColors.ControlLightLight;
             ClientSize = new Size(987, 631);
             Controls.Add(button2);
-            Controls.Add(lblNewPasswordError);
             Controls.Add(lblPhoneError);
             Controls.Add(lblAddressError);
             Controls.Add(lblUsernameError);
@@ -294,7 +284,6 @@
         private Label lblUsernameError;
         private Label lblAddressError;
         private Label lblPhoneError;
-        private Label lblNewPasswordError;
         private Button button2;
     }
 }
