@@ -12,7 +12,8 @@ namespace BookStore.Application.Services
     bool IsUsrNameExisit(string usrName);
     bool IsUsrEmailExisit(string usrEmail);
     bool IsUsrPhoneExisit(string phone);
-    Customer IsLogin(string username, string password);
+    bool IsUsrPassExisit(string Password);
+        Customer IsLogin(string username, string password);
     void AddToCart(int bookId, int customerId, int quantity);
     List<Order> ShowOrders(int customerId);
     bool HasItemInCart(int customerId);

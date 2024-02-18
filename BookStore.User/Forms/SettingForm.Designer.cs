@@ -40,6 +40,15 @@
             textBox7 = new TextBox();
             textBox8 = new TextBox();
             button1 = new Button();
+            lblFirstNameError = new Label();
+            lblLastNameError = new Label();
+            lblPasswordError = new Label();
+            lblEmailError = new Label();
+            lblUsernameError = new Label();
+            lblAddressError = new Label();
+            lblPhoneError = new Label();
+            lblNewPasswordError = new Label();
+            button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -60,7 +69,6 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(250, 40);
             textBox1.TabIndex = 1;
-            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // textBox2
             // 
@@ -142,12 +150,92 @@
             button1.BackColor = Color.FromArgb(39, 55, 77);
             button1.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             button1.ForeColor = SystemColors.ButtonHighlight;
-            button1.Location = new Point(511, 531);
+            button1.Location = new Point(499, 554);
             button1.Name = "button1";
             button1.Size = new Size(223, 56);
             button1.TabIndex = 11;
             button1.Text = "Save Changes";
             button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
+            // lblFirstNameError
+            // 
+            lblFirstNameError.AutoSize = true;
+            lblFirstNameError.Location = new Point(335, 174);
+            lblFirstNameError.Name = "lblFirstNameError";
+            lblFirstNameError.Size = new Size(0, 15);
+            lblFirstNameError.TabIndex = 12;
+            // 
+            // lblLastNameError
+            // 
+            lblLastNameError.AutoSize = true;
+            lblLastNameError.Location = new Point(684, 174);
+            lblLastNameError.Name = "lblLastNameError";
+            lblLastNameError.Size = new Size(0, 15);
+            lblLastNameError.TabIndex = 13;
+            // 
+            // lblPasswordError
+            // 
+            lblPasswordError.AutoSize = true;
+            lblPasswordError.Location = new Point(335, 506);
+            lblPasswordError.Name = "lblPasswordError";
+            lblPasswordError.Size = new Size(0, 15);
+            lblPasswordError.TabIndex = 14;
+            // 
+            // lblEmailError
+            // 
+            lblEmailError.AutoSize = true;
+            lblEmailError.Location = new Point(684, 396);
+            lblEmailError.Name = "lblEmailError";
+            lblEmailError.Size = new Size(0, 15);
+            lblEmailError.TabIndex = 15;
+            // 
+            // lblUsernameError
+            // 
+            lblUsernameError.AutoSize = true;
+            lblUsernameError.Location = new Point(335, 396);
+            lblUsernameError.Name = "lblUsernameError";
+            lblUsernameError.Size = new Size(0, 15);
+            lblUsernameError.TabIndex = 16;
+            // 
+            // lblAddressError
+            // 
+            lblAddressError.AutoSize = true;
+            lblAddressError.Location = new Point(684, 287);
+            lblAddressError.Name = "lblAddressError";
+            lblAddressError.Size = new Size(0, 15);
+            lblAddressError.TabIndex = 17;
+            // 
+            // lblPhoneError
+            // 
+            lblPhoneError.AutoSize = true;
+            lblPhoneError.Location = new Point(335, 287);
+            lblPhoneError.Name = "lblPhoneError";
+            lblPhoneError.Size = new Size(0, 15);
+            lblPhoneError.TabIndex = 18;
+            // 
+            // lblNewPasswordError
+            // 
+            lblNewPasswordError.AutoSize = true;
+            lblNewPasswordError.Location = new Point(684, 506);
+            lblNewPasswordError.Name = "lblNewPasswordError";
+            lblNewPasswordError.Size = new Size(0, 15);
+            lblNewPasswordError.TabIndex = 19;
+            // 
+            // button2
+            // 
+            button2.BackColor = Color.FromArgb(39, 55, 77);
+            button2.FlatAppearance.BorderColor = Color.White;
+            button2.FlatAppearance.BorderSize = 2;
+            button2.Font = new Font("Segoe UI", 22F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button2.ForeColor = SystemColors.ControlLightLight;
+            button2.Location = new Point(130, 275);
+            button2.Name = "button2";
+            button2.Size = new Size(60, 50);
+            button2.TabIndex = 20;
+            button2.Text = "+";
+            button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
             // 
             // SettingForm
             // 
@@ -156,6 +244,15 @@
             AutoScroll = true;
             BackColor = SystemColors.ControlLightLight;
             ClientSize = new Size(987, 631);
+            Controls.Add(button2);
+            Controls.Add(lblNewPasswordError);
+            Controls.Add(lblPhoneError);
+            Controls.Add(lblAddressError);
+            Controls.Add(lblUsernameError);
+            Controls.Add(lblEmailError);
+            Controls.Add(lblPasswordError);
+            Controls.Add(lblLastNameError);
+            Controls.Add(lblFirstNameError);
             Controls.Add(button1);
             Controls.Add(label2);
             Controls.Add(pictureBox1);
@@ -171,7 +268,6 @@
             Margin = new Padding(2);
             Name = "SettingForm";
             Text = "SettingForm";
-            Load += SettingForm_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -191,5 +287,14 @@
         private TextBox textBox7;
         private TextBox textBox8;
         private Button button1;
+        private Label lblFirstNameError;
+        private Label lblLastNameError;
+        private Label lblPasswordError;
+        private Label lblEmailError;
+        private Label lblUsernameError;
+        private Label lblAddressError;
+        private Label lblPhoneError;
+        private Label lblNewPasswordError;
+        private Button button2;
     }
 }

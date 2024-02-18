@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using BookStore.Admin;
 using BookStore.Application.Services;
 using BookStore.Models;
 using System;
@@ -6,8 +7,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Test.Presentation.AutoFag;
@@ -29,9 +32,7 @@ namespace BookStore.User.Forms
         Customer customer;
 
 
-
-
-
+        Form1 mainForm;
         public SettingForm(Customer _customer)
         {
             InitializeComponent();
@@ -44,13 +45,19 @@ namespace BookStore.User.Forms
             customer = _customer;
             SetProfilePicture();
 
+            //set buttton rounded 
+            SetRoundedButton(button2);
+
+
 
             //Responsive In WINDOW:
             //this.Resize += Form1_Resize;
 
 
 
-            //
+            //Validations :
+            this.mainForm = (Form1)mainForm;
+
 
         }
 
@@ -215,20 +222,216 @@ namespace BookStore.User.Forms
         #endregion
 
 
-
-
-
-
-
-        private void SettingForm_Load(object sender, EventArgs e)
+        #region Validations :
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            mainForm.ShowLogin();
+            this.Close();
+        }
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var connectionCustomer = AutoFag.RegisterCustomer();
+            ICustomerService CustomerService = connectionCustomer.Resolve<ICustomerService>();
+
+            string firstName = textBox1.Text.Trim();
+            string lastName = textBox2.Text.Trim();
+            string phone = textBox3.Text.Trim();
+            string address = textBox4.Text.Trim();
+            string username = textBox5.Text.Trim();
+            string email = textBox6.Text.Trim();
+            string password = textBox7.Text;
+            string newPassword = textBox8.Text;
+
+            // Reset validation labels
+            lblFirstNameError.Text = "";
+            lblLastNameError.Text = "";
+            lblPhoneError.Text = "";
+            lblAddressError.Text = "";
+            lblUsernameError.Text = "";
+            lblEmailError.Text = "";
+            lblPasswordError.Text = "";
+            lblNewPasswordError.Text = "";
+
+            // Validation
+            bool isValid = true;
+
+            if (string.IsNullOrEmpty(firstName))
+            {
+                lblFirstNameError.Text = "First name is required";
+                isValid = false;
+            }
+
+            if (string.IsNullOrEmpty(lastName))
+            {
+                lblLastNameError.Text = "Last name is required";
+                isValid = false;
+            }
+
+            if (string.IsNullOrEmpty(email))
+            {
+                lblEmailError.Text = "Email is required";
+                isValid = false;
+            }
+            else if (!IsValidEmail(email))
+            {
+                lblEmailError.Text = "Invalid email format";
+                isValid = false;
+            }
+            else if (CustomerService.IsUsrEmailExisit(email))
+            {
+                lblEmailError.Text = "Sorry This email Is Exisited";
+                isValid = false;
+            }
+
+
+            if (string.IsNullOrEmpty(username))
+            {
+                lblUsernameError.Text = "Username is required";
+                isValid = false;
+            }
+            else if (CustomerService.IsUsrNameExisit(username))
+            {
+                lblUsernameError.Text = "Sorry this username is exisited";
+                isValid = false;
+            }
+
+
+            if (string.IsNullOrEmpty(password))
+            {
+                lblPasswordError.Text = "Current Password is required";
+                isValid = false;
+            }
+
+            if (!CustomerService.IsUsrPassExisit(password))
+            {
+                lblNewPasswordError.Text = "Current Password Does not Exist";
+                isValid = false;
+            }
+
+
+
+            if (string.IsNullOrEmpty(phone))
+            {
+                lblPhoneError.Text = "Phone is required";
+                isValid = false;
+            }
+            else if (!IsValidPhone(phone))
+            {
+                lblPhoneError.Text = "Invalid phone format";
+                isValid = false;
+            }
+            else if (CustomerService.IsUsrPhoneExisit(phone))
+            {
+                lblPhoneError.Text = "Sorry this phone is exisited";
+                isValid = false;
+            }
+
+
+
+            if (string.IsNullOrEmpty(address))
+            {
+                lblAddressError.Text = "Address is required";
+                isValid = false;
+            }
+
+            if (!isValid)
+                return;
+
+
+            Customer newCustomer = new Customer
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                Email = email,
+                UserName = username,
+                Password = password,
+                Phone = phone,
+                Address = address,
+                IsAdmin = false,
+                ProfilePic = "profilePicture.png"
+            };
+
+            bool success = CustomerService.UpdateCustomer(newCustomer);
+
+            if (success)
+            {
+                this.Close();
+                mainForm.ShowLogin();
+            }
+
 
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        bool IsValidPhone(string phone)
         {
-
-
+            string pattern = @"^(?!01\d{8}$).*";
+            return Regex.IsMatch(phone, pattern);
         }
+
+        bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
+        #endregion
+
+
+
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files (*.jpg; *.jpeg; *.png; *.gif; *.bmp)|*.jpg; *.jpeg; *.png; *.gif; *.bmp|All files (*.*)|*.*";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    string selectedImagePath = openFileDialog.FileName;
+                    Image selectedImage = Image.FromFile(selectedImagePath);
+
+                    // Assign the selected image to the PictureBox
+                    pictureBox1.Image = selectedImage;
+                    customer.ProfilePic = selectedImagePath;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error loading image: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+
+
+        private void SetRoundedButton(Button button)
+        {
+            button.FlatStyle = FlatStyle.Flat;
+            button.FlatAppearance.BorderSize = 0;
+            button.BackColor = Color.FromArgb(39, 55, 77); button.ForeColor = Color.White;
+
+            GraphicsPath path = new GraphicsPath();
+            int radius = 20; // Set the radius for rounding the corners
+            Rectangle bounds = button.ClientRectangle;
+            path.AddArc(bounds.X, bounds.Y, radius, radius, 180, 90);
+            path.AddArc(bounds.X + bounds.Width - radius, bounds.Y, radius, radius, 270, 90);
+            path.AddArc(bounds.X + bounds.Width - radius, bounds.Y + bounds.Height - radius, radius, radius, 0, 90);
+            path.AddArc(bounds.X, bounds.Y + bounds.Height - radius, radius, radius, 90, 90);
+            path.CloseAllFigures();
+            button.Region = new Region(path);
+        }
+
+
+
     }
 }
