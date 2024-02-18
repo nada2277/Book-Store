@@ -139,33 +139,34 @@
             // 
             // button1
             // 
-            button1.BackColor = SystemColors.ActiveCaption;
-            button1.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.ForeColor = SystemColors.ControlLightLight;
-            button1.Location = new Point(535, 561);
+            button1.BackColor = Color.FromArgb(39, 55, 77);
+            button1.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.ForeColor = SystemColors.ButtonHighlight;
+            button1.Location = new Point(511, 531);
             button1.Name = "button1";
-            button1.Size = new Size(156, 48);
+            button1.Size = new Size(223, 56);
             button1.TabIndex = 11;
-            button1.Text = "Save";
+            button1.Text = "Save Changes";
             button1.UseVisualStyleBackColor = false;
             // 
             // SettingForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoScroll = true;
             BackColor = SystemColors.ControlLightLight;
             ClientSize = new Size(987, 631);
             Controls.Add(button1);
-            Controls.Add(textBox8);
-            Controls.Add(textBox7);
-            Controls.Add(textBox6);
-            Controls.Add(textBox5);
             Controls.Add(label2);
             Controls.Add(pictureBox1);
-            Controls.Add(textBox4);
+            Controls.Add(textBox7);
+            Controls.Add(textBox5);
             Controls.Add(textBox3);
-            Controls.Add(textBox2);
             Controls.Add(textBox1);
+            Controls.Add(textBox2);
+            Controls.Add(textBox4);
+            Controls.Add(textBox6);
+            Controls.Add(textBox8);
             Controls.Add(label1);
             Margin = new Padding(2);
             Name = "SettingForm";
