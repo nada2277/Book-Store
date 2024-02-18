@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -34,6 +35,7 @@ namespace BookStore.User.Forms
         private const string PlaceholderTextPass = "Enter Current Password";
         private const string PlaceholderTextPasscon = "Enter New  Password";
 
+        bool picIsChanged = false;
         private string PathProfilePic;
 
         Customer customer;
@@ -55,13 +57,11 @@ namespace BookStore.User.Forms
             //set buttton rounded 
             SetRoundedButton(button2);
 
-
-
             //Responsive In WINDOW:
             //this.Resize += Form1_Resize;
 
             homeForm = _homeForm;
-
+           
         }
 
         #region PlaceHolder IN Texts :
@@ -227,7 +227,7 @@ namespace BookStore.User.Forms
 
 
         #region Validations :
-   
+
 
 
         private void button1_Click(object sender, EventArgs e)
@@ -257,7 +257,7 @@ namespace BookStore.User.Forms
             // Validation
             bool isValid = true;
 
-            if (firstName == PlaceholderTextFN )
+            if (firstName == PlaceholderTextFN)
             {
                 lblFirstNameError.Text = "First name is required";
                 lblFirstNameError.ForeColor = Color.Red;
@@ -288,7 +288,7 @@ namespace BookStore.User.Forms
 
                 isValid = false;
             }
-            else if (CustomerService.IsUsrPhoneExisit(phone))
+            else if (CustomerService.IsUsrPhoneExisit(phone) && customer.Phone != phone)
             {
                 lblPhoneError.Text = "Sorry this phone is exisited";
                 lblPhoneError.ForeColor = Color.Red;
@@ -312,7 +312,7 @@ namespace BookStore.User.Forms
 
                 isValid = false;
             }
-            else if (CustomerService.IsUsrNameExisit(username))
+            else if (CustomerService.IsUsrNameExisit(username) && customer.UserName != username)
             {
                 lblUsernameError.Text = "Sorry this username is exisited";
                 lblUsernameError.ForeColor = Color.Red;
@@ -337,7 +337,7 @@ namespace BookStore.User.Forms
 
                 isValid = false;
             }
-            else if (CustomerService.IsUsrEmailExisit(email))
+            else if (CustomerService.IsUsrEmailExisit(email) && customer.Email != email)
             {
                 lblEmailError.Text = "Sorry This email Is Exisited";
                 lblEmailError.ForeColor = Color.Red;
@@ -354,7 +354,8 @@ namespace BookStore.User.Forms
                 lblPasswordError.ForeColor = Color.Red;
 
                 isValid = false;
-            }else if (!CustomerService.IsUsrPassExisit(password))
+            }
+            else if (!CustomerService.IsUsrPassExisit(password))
             {
                 lblPasswordError.Text = "Current Password Does not Exist";
                 lblPasswordError.ForeColor = Color.Red;
@@ -382,7 +383,21 @@ namespace BookStore.User.Forms
             customer.Phone = phone;
             customer.Address = address;
             customer.IsAdmin = false;
-            customer.ProfilePic = PathProfilePic;
+
+            //to save image into images file 
+            if (picIsChanged)
+            {
+
+                customer.ProfilePic = PathProfilePic;
+                try
+                {
+                    pictureBox1.Image.Save(Path.GetFullPath($"..\\..\\..\\Images\\{PathProfilePic}"));
+
+                }catch (Exception ex)
+                {
+
+                }
+            }
 
             bool success = CustomerService.UpdateCustomer(customer);
 
@@ -408,8 +423,8 @@ namespace BookStore.User.Forms
                 SetPlaceholder(textBox7);
                 SetPlaceholder(textBox8);
 
-
-                homeForm.UpdateProfilePicture(PathProfilePic);
+                if (picIsChanged)
+                    homeForm.UpdateProfilePicture(PathProfilePic);
 
                 MessageBox.Show("Profile updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -461,6 +476,7 @@ namespace BookStore.User.Forms
                     pictureBox1.Image = selectedImage;
 
                     PathProfilePic = Path.GetFileName(selectedImagePath);
+                    picIsChanged = true;
 
                 }
                 catch (Exception ex)

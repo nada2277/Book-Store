@@ -32,7 +32,6 @@
             panel1 = new Panel();
             button2 = new Button();
             label1 = new Label();
-            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -40,25 +39,23 @@
             panel1.BackColor = Color.White;
             panel1.BackgroundImage = (Image)resources.GetObject("panel1.BackgroundImage");
             panel1.BackgroundImageLayout = ImageLayout.Center;
-            panel1.Controls.Add(button2);
-            panel1.Controls.Add(label1);
-            panel1.Dock = DockStyle.Fill;
+            panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(2, 2, 2, 24);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1108, 708);
+            panel1.Size = new Size(1108, 508);
             panel1.TabIndex = 0;
             // 
             // button2
             // 
-            button2.Anchor = AnchorStyles.Bottom;
+            button2.Anchor = AnchorStyles.Top;
             button2.BackColor = Color.FromArgb(39, 55, 77);
             button2.Cursor = Cursors.Hand;
             button2.FlatAppearance.BorderSize = 0;
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Tahoma", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             button2.ForeColor = Color.White;
-            button2.Location = new Point(454, 628);
+            button2.Location = new Point(449, 592);
             button2.Margin = new Padding(2, 2, 2, 24);
             button2.Name = "button2";
             button2.Size = new Size(249, 65);
@@ -69,12 +66,12 @@
             // 
             // label1
             // 
-            label1.Anchor = AnchorStyles.Bottom;
+            label1.Anchor = AnchorStyles.Top;
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Tahoma", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.FromArgb(39, 55, 77);
-            label1.Location = new Point(412, 562);
+            label1.Location = new Point(408, 517);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
             label1.Size = new Size(343, 48);
@@ -87,13 +84,14 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1108, 708);
+            Controls.Add(label1);
+            Controls.Add(button2);
             Controls.Add(panel1);
             Margin = new Padding(2);
             Name = "EmptyCart";
             Text = "EmptyCart";
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
