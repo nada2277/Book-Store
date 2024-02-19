@@ -30,20 +30,16 @@ namespace BookStore.User.Forms
             CartItemService = connectionCartItem.Resolve<ICartItemService>();
             this.customer = customer;
             InitializeComponent();
-            AddItems(CartItemService.BookCartItems(customer.Id));
+            ShowCartItems();
 
         }
-        public void UpdateCart()
+
+       public void ShowCartItems()
         {
-            AddItems(CartItemService.BookCartItems(customer.Id));
-        }
-        void AddItems(List<BookCart> cart)
-        {
+            List<BookCart> cart = CartItemService.BookCartItems(customer.Id);
             if (cart.Count == 0)
             {
                 homeForm.ShowEmptyCart();
-                this.Close();
-
                 return;
             }
             cartItemPanel.Controls.Clear();

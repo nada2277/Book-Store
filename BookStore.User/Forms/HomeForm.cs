@@ -14,7 +14,7 @@ namespace BookStore.User.Forms
         CartForm cartForm;
         EmptyCart emptyCart;
         OrderPlacedForm orderPlacedForm;
-        OrdersForm ordersForm ;
+        OrdersForm ordersForm;
         CategoriesForm categoriesForm;
         OneCategoryForm oneCategoryForm;
         Customer customer;
@@ -32,13 +32,14 @@ namespace BookStore.User.Forms
             mainForm = form;
             customer = _customer;
 
-            settingForm = new SettingForm(customer , this);
+            settingForm = new SettingForm(customer, this);
             orderPlacedForm = new OrderPlacedForm(this);
 
             booksForm = new BooksForm(customer.Id);
-            ordersForm = new OrdersForm(customer.Id);
+            ordersForm = new OrdersForm();
             emptyCart = new EmptyCart(this);
             categoriesForm = new CategoriesForm(this);
+            cartForm = new CartForm(customer, this);
 
             OpenForm(booksForm, this);
             #region Header
@@ -131,19 +132,21 @@ namespace BookStore.User.Forms
         private void button2_Click(object sender, EventArgs e) =>
           OpenForm(categoriesForm, sender);
 
-        private void button3_Click(object sender, EventArgs e) =>
-          OpenForm(ordersForm, sender);
+        private void button3_Click(object sender, EventArgs e)
+        {
+            ordersForm.ShowOrders(customer.Id);
+            OpenForm(ordersForm, sender);
+        }
 
         private void button4_Click(object sender, EventArgs e)
         {
             if (CustomerService.HasItemInCart(customer.Id))
             {
-                cartForm = new CartForm(customer, this);
+                cartForm.ShowCartItems();
                 OpenForm(cartForm, sender);
             }
             else
-                OpenForm(emptyCart, this);
-            button4.BackColor = Color.FromArgb(157, 178, 191);
+                OpenForm(emptyCart, sender);
 
         }
 
@@ -158,7 +161,7 @@ namespace BookStore.User.Forms
         {
             if (CustomerService.HasItemInCart(customer.Id))
             {
-                cartForm = new CartForm(customer, this);
+                
                 OpenForm(cartForm, sender);
             }
             else
@@ -202,7 +205,7 @@ namespace BookStore.User.Forms
                 int nBottomRect,   // y-coordinate of lower-right corner
                 int nWidthEllipse, // width of ellipse
                 int nHeightEllipse // height of ellipse
-            ); 
+            );
         #endregion
 
     }

@@ -34,12 +34,12 @@
             updateBtn = new Button();
             button5 = new Button();
             nextBtn = new Button();
-            prevBtn = new Button();
             textBox1 = new TextBox();
             textBox2 = new TextBox();
             textBox3 = new TextBox();
             textBox4 = new TextBox();
             textBox5 = new TextBox();
+            prevBtn = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -106,17 +106,6 @@
             nextBtn.UseVisualStyleBackColor = true;
             nextBtn.Click += nextBtn_Click;
             // 
-            // prevBtn
-            // 
-            prevBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            prevBtn.Location = new Point(570, 686);
-            prevBtn.Name = "prevBtn";
-            prevBtn.Size = new Size(184, 52);
-            prevBtn.TabIndex = 9;
-            prevBtn.Text = "Previous";
-            prevBtn.UseVisualStyleBackColor = true;
-            prevBtn.Click += prevBtn_Click;
-            // 
             // textBox1
             // 
             textBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -173,6 +162,17 @@
             textBox5.Size = new Size(355, 54);
             textBox5.TabIndex = 14;
             // 
+            // prevBtn
+            // 
+            prevBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            prevBtn.Location = new Point(570, 686);
+            prevBtn.Name = "prevBtn";
+            prevBtn.Size = new Size(184, 52);
+            prevBtn.TabIndex = 9;
+            prevBtn.Text = "Previous";
+            prevBtn.UseVisualStyleBackColor = true;
+            prevBtn.Click += prevBtn_Click;
+            // 
             // BooksForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -205,11 +205,11 @@
         private Button updateBtn;
         private Button button5;
         private Button nextBtn;
-        private Button prevBtn;
         private TextBox textBox1;
         private TextBox textBox2;
         private TextBox textBox3;
         private TextBox textBox4;
         private TextBox textBox5;
+        private Button prevBtn;
     }
 }

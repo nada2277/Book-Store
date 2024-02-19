@@ -22,7 +22,7 @@ namespace BookStore.Application.Services
                 _CategoryRepository.Save();
             return isAdded;
         }
-        public bool DeleteCartItem(int categoryId)
+        public bool DeleteCategory(int categoryId)
         {
             Category category = GetbyId(categoryId);
             bool isDeleted = _CategoryRepository.Delete(category);

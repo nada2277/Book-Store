@@ -18,21 +18,25 @@ namespace BookStore.User.Forms
     {
         Autofac.IContainer connectionCustomer;
         ICustomerService CustomerService;
-        public OrdersForm(int id)
+        public OrdersForm()
         {
             InitializeComponent();
             connectionCustomer = AutoFag.RegisterCustomer();
             CustomerService = connectionCustomer.Resolve<ICustomerService>();
+        }
+        public void ShowOrders(int id)
+        {
             List<Order> orders = CustomerService.ShowOrders(id);
+            flowLayoutPanel1.Controls.Clear();
             foreach (Order order in orders)
             {
                 OrderControl control = new OrderControl();
-                control.OrderId ="#"+order.Id.ToString();
-                control.OrderStatus=order.Status;
-                control.Address=order.Address;
-                control.OrderedAt=order.OrderedAt.ToString("dd/MM/yyyy");
-                control.ArrivedOn=order.ArrivedOn?.ToString("dd/MM/yyyy")?? " ";
-                control.Price=order.TotalPrice.ToString()+" LE";
+                control.OrderId = "#" + order.Id.ToString();
+                control.OrderStatus = order.Status;
+                control.Address = order.Address;
+                control.OrderedAt = order.OrderedAt.ToString("dd/MM/yyyy");
+                control.ArrivedOn = order.ArrivedOn?.ToString("dd/MM/yyyy") ?? " ";
+                control.Price = order.TotalPrice.ToString() + " LE";
                 flowLayoutPanel1.Controls.Add(control);
             }
         }
