@@ -13,7 +13,7 @@ namespace BookStore.Application.Services
         Book GetBookById(int id);
         bool AddBook(Book book);
         bool UpdateBook(Book book);
-        bool DeleteBook(Book book);
+        bool DeleteBook(int bookId);
         List<Book> GetByCategoryName(string name, int num, int pageIndex);
         List<Book> GetBooksByName(string name, int num, int pageIndex);
 
