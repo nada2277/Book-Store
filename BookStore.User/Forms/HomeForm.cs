@@ -14,7 +14,7 @@ namespace BookStore.User.Forms
         CartForm cartForm;
         EmptyCart emptyCart;
         OrderPlacedForm orderPlacedForm;
-        OrdersForm ordersForm = new OrdersForm();
+        OrdersForm ordersForm ;
         CategoriesForm categoriesForm;
         OneCategoryForm oneCategoryForm;
         Customer customer;
@@ -36,6 +36,7 @@ namespace BookStore.User.Forms
             orderPlacedForm = new OrderPlacedForm(this);
 
             booksForm = new BooksForm(customer.Id);
+            ordersForm = new OrdersForm(customer.Id);
             emptyCart = new EmptyCart(this);
             categoriesForm = new CategoriesForm(this);
 

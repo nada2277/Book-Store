@@ -15,7 +15,7 @@ namespace BookStore.Models
         public string Address { get; set; }
         public double TotalPrice { get; set; }
         public DateTime OrderedAt { get; set; }
-        public DateTime ArrivedOn { get; set; }
+        public DateTime? ArrivedOn { get; set; }
 
 
         //Customer-Order one to many
