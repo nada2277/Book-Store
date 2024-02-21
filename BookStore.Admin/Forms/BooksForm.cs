@@ -29,7 +29,7 @@ namespace BookStore.Admin.Forms
             BookService = connectionBook.Resolve<IBookService>();
 
             pageNum = 1;
-            maxPageNum = BookService.GetCount(); ;
+            maxPageNum = BookService.GetCount();
             ShowBooks(BookService.GetAllPagination(10, pageNum));
         }
 
@@ -75,22 +75,38 @@ namespace BookStore.Admin.Forms
             ShowBooks(BookService.GetAllPagination(10, pageNum));
         }
 
+
+
         private void addBtn_Click(object sender, EventArgs e)
         {
-            Book book = new Book()
+            if (!string.IsNullOrEmpty(textBox1.Text)
+               && !string.IsNullOrEmpty(textBox2.Text)
+               && !string.IsNullOrEmpty(textBox3.Text)
+               && !string.IsNullOrEmpty(textBox4.Text)
+               && !string.IsNullOrEmpty(textBox5.Text))
             {
-                Name = textBox1.Text,
-                Stock = int.Parse(textBox2.Text),
-                Description = textBox3.Text,
-                Price = double.Parse(textBox4.Text),
-                BookImg = textBox5.Text,
-            };
-            BookService.AddBook(book);
-            ShowBooks(BookService.GetAllPagination(10, pageNum));
+                Book book = new Book()
+                {
+                    Name = textBox1.Text,
+                    Stock = int.Parse(textBox2.Text),
+                    Description = textBox3.Text,
+                    Price = double.Parse(textBox4.Text),
+                    BookImg = textBox5.Text,
+                };
+                BookService.AddBook(book);
+                ShowBooks(BookService.GetAllPagination(10, pageNum));
+            }
         }
 
         private void updateBtn_Click(object sender, EventArgs e)
         {
+            if(!string.IsNullOrEmpty(textBox1.Text)
+                && !string.IsNullOrEmpty(textBox2.Text)
+                && !string.IsNullOrEmpty(textBox3.Text)
+                && !string.IsNullOrEmpty(textBox4.Text)
+                && !string.IsNullOrEmpty(textBox5.Text))
+            {
+
             Book book = new Book()
             {
                 Id = int.Parse(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value.ToString()),
@@ -102,6 +118,7 @@ namespace BookStore.Admin.Forms
             };
             BookService.UpdateBook(book);
             ShowBooks(BookService.GetAllPagination(10, pageNum));
+            }
         }
 
         private void getOne_Click(object sender, EventArgs e)
@@ -120,6 +137,16 @@ namespace BookStore.Admin.Forms
             int Id = int.Parse(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value.ToString());
             BookService.DeleteBook(Id);
             ShowBooks(BookService.GetAllPagination(10, pageNum));
+        }
+
+        private void BooksForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

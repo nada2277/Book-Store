@@ -28,104 +28,149 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBox1 = new TextBox();
-            button5 = new Button();
-            updateBtn = new Button();
-            addBtn = new Button();
-            getOne = new Button();
             dataGridView1 = new DataGridView();
+            textBox1 = new TextBox();
+            addBtn = new Button();
+            updateBtn = new Button();
+            getOne = new Button();
+            button5 = new Button();
+            panel1 = new Panel();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
-            // 
-            // textBox1
-            // 
-            textBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(46, 54);
-            textBox1.Margin = new Padding(4, 5, 4, 5);
-            textBox1.MaximumSize = new Size(355, 100);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.PlaceholderText = "Category Name";
-            textBox1.Size = new Size(355, 54);
-            textBox1.TabIndex = 22;
-            // 
-            // button5
-            // 
-            button5.Location = new Point(307, 647);
-            button5.Name = "button5";
-            button5.Size = new Size(230, 67);
-            button5.TabIndex = 19;
-            button5.Text = "Delete";
-            button5.UseVisualStyleBackColor = true;
-            button5.Click += button5_Click;
-            // 
-            // updateBtn
-            // 
-            updateBtn.Location = new Point(307, 549);
-            updateBtn.Name = "updateBtn";
-            updateBtn.Size = new Size(230, 67);
-            updateBtn.TabIndex = 18;
-            updateBtn.Text = "Update";
-            updateBtn.UseVisualStyleBackColor = true;
-            updateBtn.Click += updateBtn_Click;
-            // 
-            // addBtn
-            // 
-            addBtn.Location = new Point(50, 549);
-            addBtn.Name = "addBtn";
-            addBtn.Size = new Size(230, 67);
-            addBtn.TabIndex = 17;
-            addBtn.Text = "Add";
-            addBtn.UseVisualStyleBackColor = true;
-            addBtn.Click += addBtn_Click;
-            // 
-            // getOne
-            // 
-            getOne.Location = new Point(46, 647);
-            getOne.Name = "getOne";
-            getOne.Size = new Size(230, 67);
-            getOne.TabIndex = 16;
-            getOne.Text = "Get One";
-            getOne.UseVisualStyleBackColor = true;
-            getOne.Click += getOne_Click;
             // 
             // dataGridView1
             // 
             dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.BackgroundColor = Color.BurlyWood;
+            dataGridView1.BorderStyle = BorderStyle.None;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(554, 70);
+            dataGridView1.Location = new Point(416, 90);
+            dataGridView1.Margin = new Padding(2);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 62;
-            dataGridView1.Size = new Size(832, 644);
-            dataGridView1.TabIndex = 23;
+            dataGridView1.Size = new Size(588, 248);
+            dataGridView1.TabIndex = 24;
+            // 
+            // textBox1
+            // 
+            textBox1.BorderStyle = BorderStyle.None;
+            textBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox1.Location = new Point(30, 66);
+            textBox1.MaximumSize = new Size(250, 62);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.PlaceholderText = "Category Name";
+            textBox1.Size = new Size(250, 34);
+            textBox1.TabIndex = 25;
+            // 
+            // addBtn
+            // 
+            addBtn.BackColor = Color.Olive;
+            addBtn.Font = new Font("Segoe UI Black", 9.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            addBtn.Location = new Point(11, 311);
+            addBtn.Margin = new Padding(2);
+            addBtn.Name = "addBtn";
+            addBtn.Size = new Size(161, 40);
+            addBtn.TabIndex = 26;
+            addBtn.Text = "Add";
+            addBtn.UseVisualStyleBackColor = false;
+            addBtn.Click += addBtn_Click;
+            // 
+            // updateBtn
+            // 
+            updateBtn.BackColor = Color.Olive;
+            updateBtn.Font = new Font("Segoe UI Black", 9.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            updateBtn.Location = new Point(187, 311);
+            updateBtn.Margin = new Padding(2);
+            updateBtn.Name = "updateBtn";
+            updateBtn.Size = new Size(161, 40);
+            updateBtn.TabIndex = 27;
+            updateBtn.Text = "Update";
+            updateBtn.UseVisualStyleBackColor = false;
+            updateBtn.Click += updateBtn_Click;
+            // 
+            // getOne
+            // 
+            getOne.BackColor = Color.Olive;
+            getOne.Font = new Font("Segoe UI Black", 9.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            getOne.Location = new Point(11, 400);
+            getOne.Margin = new Padding(2);
+            getOne.Name = "getOne";
+            getOne.Size = new Size(161, 40);
+            getOne.TabIndex = 28;
+            getOne.Text = "Get One";
+            getOne.UseVisualStyleBackColor = false;
+            getOne.Click += getOne_Click;
+            // 
+            // button5
+            // 
+            button5.BackColor = Color.Olive;
+            button5.Font = new Font("Segoe UI Black", 9.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            button5.Location = new Point(187, 400);
+            button5.Margin = new Padding(2);
+            button5.Name = "button5";
+            button5.Size = new Size(161, 40);
+            button5.TabIndex = 29;
+            button5.Text = "Delete";
+            button5.UseVisualStyleBackColor = false;
+            button5.Click += button5_Click;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = SystemColors.Desktop;
+            panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(textBox1);
+            panel1.Location = new Point(12, 90);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(336, 191);
+            panel1.TabIndex = 30;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Snap ITC", 36F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.Maroon;
+            label1.Location = new Point(562, 9);
+            label1.Name = "label1";
+            label1.Size = new Size(333, 63);
+            label1.TabIndex = 31;
+            label1.Text = "Categories";
             // 
             // CategoriesForm
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1432, 787);
-            Controls.Add(dataGridView1);
-            Controls.Add(textBox1);
+            ClientSize = new Size(1025, 465);
+            Controls.Add(label1);
+            Controls.Add(panel1);
             Controls.Add(button5);
+            Controls.Add(getOne);
             Controls.Add(updateBtn);
             Controls.Add(addBtn);
-            Controls.Add(getOne);
-            MinimumSize = new Size(1454, 843);
+            Controls.Add(dataGridView1);
+            Margin = new Padding(2);
             Name = "CategoriesForm";
             Text = "Categories";
+            Load += CategoriesForm_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private TextBox textBox1;
-        private Button button5;
-        private Button updateBtn;
-        private Button addBtn;
-        private Button getOne;
         private DataGridView dataGridView1;
+        private TextBox textBox1;
+        private Button addBtn;
+        private Button updateBtn;
+        private Button getOne;
+        private Button button5;
+        private Panel panel1;
+        private Label label1;
     }
 }

@@ -13,6 +13,7 @@ namespace BookStore.User.Forms
         BooksForm booksForm;
         CartForm cartForm;
         EmptyCart emptyCart;
+        EmptyOrder emptyOrder;
         OrderPlacedForm orderPlacedForm;
         OrdersForm ordersForm;
         CategoriesForm categoriesForm;
@@ -20,8 +21,11 @@ namespace BookStore.User.Forms
         Customer customer;
         SettingForm settingForm;
         Form1 mainForm;
+
         IContainer connectionCustomer;
         ICustomerService CustomerService;
+        Autofac.IContainer connectionOrder;
+        IOrderService OrderService;
         public HomeForm(Customer _customer, Form1 form)
         {
             InitializeComponent();
@@ -29,12 +33,15 @@ namespace BookStore.User.Forms
             connectionCustomer = AutoFag.RegisterCustomer();
             CustomerService = connectionCustomer.Resolve<ICustomerService>();
 
+            connectionOrder = AutoFag.RegisterOrder();
+            OrderService = connectionOrder.Resolve<IOrderService>();
+
             mainForm = form;
             customer = _customer;
 
             settingForm = new SettingForm(customer, this);
             orderPlacedForm = new OrderPlacedForm(this);
-
+            emptyOrder = new EmptyOrder(this);
             booksForm = new BooksForm(customer.Id);
             ordersForm = new OrdersForm();
             emptyCart = new EmptyCart(this);
@@ -58,6 +65,12 @@ namespace BookStore.User.Forms
             searchPanel.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, searchPanel.Width, searchPanel.Height, 50, 50));
             #endregion
             button1.BackColor = Color.FromArgb(157, 178, 191);
+
+            #region ChangeOrderStatus
+            List<Order> orders = CustomerService.ShowOrders(customer.Id);
+            foreach (var item in orders)
+                OrderService.ChangeOrderStatusAuto(item.Id);
+            #endregion
         }
 
         private void ActivateBtn(object btnSender)
@@ -134,8 +147,14 @@ namespace BookStore.User.Forms
 
         private void button3_Click(object sender, EventArgs e)
         {
-            ordersForm.ShowOrders(customer.Id);
-            OpenForm(ordersForm, sender);
+            if (CustomerService.ShowOrders(customer.Id).Count > 0)
+            {
+                OpenForm(ordersForm, sender);
+                ordersForm.ShowOrders(customer.Id);
+            }
+            else
+                OpenForm(emptyOrder, this);
+
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -161,17 +180,24 @@ namespace BookStore.User.Forms
         {
             if (CustomerService.HasItemInCart(customer.Id))
             {
-                
+                cartForm.ShowCartItems();
                 OpenForm(cartForm, sender);
             }
             else
-                OpenForm(emptyCart, this);
+                OpenForm(emptyCart, sender);
             button4.BackColor = Color.FromArgb(157, 178, 191);
         }
 
         private void pictureBox4_Click(object sender, EventArgs e)
         {
-            OpenForm(ordersForm, sender);
+            if (CustomerService.ShowOrders(customer.Id).Count > 0)
+            {
+                OpenForm(ordersForm, sender);
+                ordersForm.ShowOrders(customer.Id);
+            }
+            else
+                OpenForm(emptyOrder, this);
+
             button3.BackColor = Color.FromArgb(157, 178, 191);
         }
 

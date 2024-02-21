@@ -9,7 +9,7 @@ namespace BookStore.Application.Contracts
 {
     public interface IOrederRepository : IRepository<Order, int>
   {
-    bool ChangeStatus(OrderStatus status , Order order);
+    bool ChangeStatus( Order order);
 
 
   }

@@ -18,11 +18,14 @@ namespace BookStore.User.Forms
     {
         Autofac.IContainer connectionCustomer;
         ICustomerService CustomerService;
+        
         public OrdersForm()
         {
             InitializeComponent();
             connectionCustomer = AutoFag.RegisterCustomer();
             CustomerService = connectionCustomer.Resolve<ICustomerService>();
+            
+            
         }
         public void ShowOrders(int id)
         {
