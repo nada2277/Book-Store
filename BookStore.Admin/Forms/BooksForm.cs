@@ -30,7 +30,7 @@ namespace BookStore.Admin.Forms
 
             pageNum = 1;
             maxPageNum = BookService.GetCount();
-            ShowBooks(BookService.GetAllPagination(10, pageNum));
+            ShowBooks(BookService.GetAllPagination(26, pageNum));
         }
 
         void ShowButtons()
@@ -66,13 +66,13 @@ namespace BookStore.Admin.Forms
         private void prevBtn_Click(object sender, EventArgs e)
         {
             pageNum--;
-            ShowBooks(BookService.GetAllPagination(10, pageNum));
+            ShowBooks(BookService.GetAllPagination(26, pageNum));
         }
 
         private void nextBtn_Click(object sender, EventArgs e)
         {
             pageNum++;
-            ShowBooks(BookService.GetAllPagination(10, pageNum));
+            ShowBooks(BookService.GetAllPagination(26, pageNum));
         }
 
 
