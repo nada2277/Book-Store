@@ -1,4 +1,4 @@
-﻿using Autofac;
+﻿
 using BookStore.Application.Services;
 using BookStore.Models;
 using System;
@@ -10,8 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Test.Presentation.AutoFag;
-
+using BookStore.User.AutoFag;
+using Autofac;
 namespace BookStore.Admin.Forms
 {
     public partial class BooksForm : Form

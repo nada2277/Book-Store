@@ -12,8 +12,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Test.Presentation.AutoFag;
-using static System.Reflection.Metadata.BlobBuilder;
 using Autofac;
 
 namespace BookStore.User.Forms

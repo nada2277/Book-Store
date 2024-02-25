@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using BookStore.Application.Services;
 using BookStore.Models;
+using BookStore.User.AutoFag;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Test.Presentation.AutoFag;
+
 
 namespace BookStore.Admin.Forms
 {
@@ -33,26 +34,26 @@ namespace BookStore.Admin.Forms
         }
         void ShowButtons()
         {
-            if (maxPageNum == 1 || maxPageNum == 0)
-            {
-                //prevBtn.Visible = false;
-                //nextBtn.Visible = false;
-            }
-            else if (pageNum == 1)
-            {
-                //prevBtn.Visible = false;
-                //nextBtn.Visible = true;
-            }
-            else if (pageNum == maxPageNum)
-            {
-                //prevBtn.Visible = true;
-                //nextBtn.Visible = false;
-            }
-            else
-            {
-                //prevBtn.Visible = true;
-                //nextBtn.Visible = true;
-            }
+            //if (maxPageNum == 1 || maxPageNum == 0)
+            //{
+            //    prevBtn.Visible = false;
+            //    nextBtn.Visible = false;
+            //}
+            //else if (pageNum == 1)
+            //{
+            //    //prevBtn.Visible = false;
+            //    //nextBtn.Visible = true;
+            //}
+            //else if (pageNum == maxPageNum)
+            //{
+            //    //prevBtn.Visible = true;
+            //    //nextBtn.Visible = false;
+            //}
+            //else
+            //{
+            //    //prevBtn.Visible = true;
+            //    //nextBtn.Visible = true;
+            //}
         }
 
         void ShowOrder(List<Order> orders)
