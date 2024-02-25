@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookStore.Context.Migrations
 {
     [DbContext(typeof(BookStoreContext))]
-    [Migration("20240218185032_EditOrderDate")]
-    partial class EditOrderDate
+    [Migration("20240225171010_mig2")]
+    partial class mig2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
