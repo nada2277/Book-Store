@@ -1,16 +1,10 @@
 ﻿using BookStore.Application.Contracts;
 using BookStore.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookStore.Application.Services
 {
 
-  public class BookCategoryService : IBookCategoryService
+    public class BookCategoryService : IBookCategoryService
   {
     IBookCategoryRepository _BookCategoryRepository { get; set; }
 

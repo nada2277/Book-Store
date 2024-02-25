@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BookStore.DTOs
+﻿namespace BookStore.DTOs
 {
-  public class BookCart
+    public class BookCart
   {
     public int BookId { get; set; }
     public int CartItemId { get; set; }

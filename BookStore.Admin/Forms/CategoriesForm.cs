@@ -1,17 +1,6 @@
 ﻿using BookStore.Application.Services;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using Autofac;
 using BookStore.Models;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using static System.Reflection.Metadata.BlobBuilder;
 using BookStore.User.AutoFag;
 
 namespace BookStore.Admin.Forms

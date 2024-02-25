@@ -1,11 +1,5 @@
 ﻿using BookStore.Application.Contracts;
 using BookStore.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookStore.Application.Services
 {
@@ -49,7 +43,7 @@ namespace BookStore.Application.Services
             UpdCustomer.Email = Customer.Email;
             UpdCustomer.Phone = Customer.Phone;
             UpdCustomer.ProfilePic = Customer.ProfilePic;
-            bool isUpdated = _CustomerRepository.Update(Customer);
+            bool isUpdated = _CustomerRepository.Update(UpdCustomer);
             if (isUpdated)
                 _CustomerRepository.Save();
             return isUpdated;
