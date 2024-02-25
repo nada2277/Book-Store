@@ -6,7 +6,7 @@ namespace BookStore.Application.Services
   {
     bool AddCategory(Category Category);
     bool UpdateCategory(Category Category);
-    bool DeleteCartItem(Category Category);
+    bool DeleteCategory(int categoryId);
     Category GetbyId(int id);
     List<Category> GetAllCategories();
   }

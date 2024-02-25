@@ -1,11 +1,5 @@
 ﻿using BookStore.Application.Contracts;
 using BookStore.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookStore.Application.Services
 {
@@ -24,10 +18,10 @@ namespace BookStore.Application.Services
                 _CustomerRepository.Save();
             return isAdded;
         }
-        public bool DeleteCustomer(Customer Customer)
+        public bool DeleteCustomer(int customerID)
         {
-
-            bool isDeleted = _CustomerRepository.Delete(Customer);
+            Customer customer=GetbyId(customerID);
+            bool isDeleted = _CustomerRepository.Delete(customer);
             if (isDeleted)
                 _CustomerRepository.Save();
             return isDeleted;
@@ -40,7 +34,16 @@ namespace BookStore.Application.Services
 
         public bool UpdateCustomer(Customer Customer)
         {
-            bool isUpdated = _CustomerRepository.Update(Customer);
+            Customer UpdCustomer = GetbyId(Customer.Id);
+            UpdCustomer.Address = Customer.Address;
+            UpdCustomer.UserName = Customer.UserName;
+            UpdCustomer.Password = Customer.Password;
+            UpdCustomer.FirstName = Customer.FirstName;
+            UpdCustomer.LastName = Customer.LastName;
+            UpdCustomer.Email = Customer.Email;
+            UpdCustomer.Phone = Customer.Phone;
+            UpdCustomer.ProfilePic = Customer.ProfilePic;
+            bool isUpdated = _CustomerRepository.Update(UpdCustomer);
             if (isUpdated)
                 _CustomerRepository.Save();
             return isUpdated;

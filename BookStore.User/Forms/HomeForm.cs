@@ -2,7 +2,6 @@ using Autofac;
 using BookStore.Application.Services;
 using BookStore.Models;
 using System.Runtime.InteropServices;
-using Test.Presentation.AutoFag;
 
 
 namespace BookStore.User.Forms
@@ -13,15 +12,19 @@ namespace BookStore.User.Forms
         BooksForm booksForm;
         CartForm cartForm;
         EmptyCart emptyCart;
-
-        OrdersForm ordersForm = new OrdersForm();
+        EmptyOrder emptyOrder;
+        OrderPlacedForm orderPlacedForm;
+        OrdersForm ordersForm;
         CategoriesForm categoriesForm;
         OneCategoryForm oneCategoryForm;
         Customer customer;
         SettingForm settingForm;
         Form1 mainForm;
+
         IContainer connectionCustomer;
         ICustomerService CustomerService;
+        Autofac.IContainer connectionOrder;
+        IOrderService OrderService;
         public HomeForm(Customer _customer, Form1 form)
         {
             InitializeComponent();
@@ -29,15 +32,20 @@ namespace BookStore.User.Forms
             connectionCustomer = AutoFag.RegisterCustomer();
             CustomerService = connectionCustomer.Resolve<ICustomerService>();
 
+            connectionOrder = AutoFag.RegisterOrder();
+            OrderService = connectionOrder.Resolve<IOrderService>();
+
             mainForm = form;
             customer = _customer;
 
-            settingForm = new SettingForm(customer , this);
-
-
+            settingForm = new SettingForm(customer, this);
+            orderPlacedForm = new OrderPlacedForm(this);
+            emptyOrder = new EmptyOrder(this);
             booksForm = new BooksForm(customer.Id);
+            ordersForm = new OrdersForm();
             emptyCart = new EmptyCart(this);
             categoriesForm = new CategoriesForm(this);
+            cartForm = new CartForm(customer, this);
 
             OpenForm(booksForm, this);
             #region Header
@@ -56,6 +64,12 @@ namespace BookStore.User.Forms
             searchPanel.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, searchPanel.Width, searchPanel.Height, 50, 50));
             #endregion
             button1.BackColor = Color.FromArgb(157, 178, 191);
+
+            #region ChangeOrderStatus
+            List<Order> orders = CustomerService.ShowOrders(customer.Id);
+            foreach (var item in orders)
+                OrderService.ChangeOrderStatusAuto(item.Id);
+            #endregion
         }
 
         private void ActivateBtn(object btnSender)
@@ -110,33 +124,49 @@ namespace BookStore.User.Forms
             button2.BackColor = Color.FromArgb(157, 178, 191);
 
         }
+        public void ShowOrderPlaced()
+        {
+            OpenForm(orderPlacedForm, this);
+            button4.BackColor = Color.FromArgb(157, 178, 191);
+        }
 
+        public void UpdateProfilePicture(string profilePicPath)
+        {
+            pictureBox1.BackgroundImage = Image.FromFile(Path.GetFullPath($"..\\..\\..\\Images\\{profilePicPath}"));
+            if (!profilePicPath.Equals("profilePicture.png"))
+                pictureBox1.BackColor = Color.Transparent;
+        }
 
+        #region Events
         private void button1_Click(object sender, EventArgs e) =>
-          OpenForm(booksForm, sender);
+         OpenForm(booksForm, sender);
 
         private void button2_Click(object sender, EventArgs e) =>
           OpenForm(categoriesForm, sender);
 
-        private void button3_Click(object sender, EventArgs e) =>
-          OpenForm(ordersForm, sender);
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (CustomerService.ShowOrders(customer.Id).Count > 0)
+            {
+                OpenForm(ordersForm, sender);
+                ordersForm.ShowOrders(customer.Id);
+            }
+            else
+                OpenForm(emptyOrder, this);
+
+        }
 
         private void button4_Click(object sender, EventArgs e)
         {
             if (CustomerService.HasItemInCart(customer.Id))
             {
-                cartForm = new CartForm(customer.Id, this);
+                cartForm.ShowCartItems();
                 OpenForm(cartForm, sender);
             }
             else
-                OpenForm(emptyCart, this);
-            button4.BackColor = Color.FromArgb(157, 178, 191);
+                OpenForm(emptyCart, sender);
 
         }
-
-        //private void button4_Click(object sender, EventArgs e)=>
-        //  OpenForm(new CartForm(customer.Id, this), sender);
-
 
         private void button6_Click(object sender, EventArgs e)
         {
@@ -149,17 +179,24 @@ namespace BookStore.User.Forms
         {
             if (CustomerService.HasItemInCart(customer.Id))
             {
-                cartForm = new CartForm(customer.Id, this);
+                cartForm.ShowCartItems();
                 OpenForm(cartForm, sender);
             }
             else
-                OpenForm(emptyCart, this);
+                OpenForm(emptyCart, sender);
             button4.BackColor = Color.FromArgb(157, 178, 191);
         }
 
         private void pictureBox4_Click(object sender, EventArgs e)
         {
-            OpenForm(ordersForm, sender);
+            if (CustomerService.ShowOrders(customer.Id).Count > 0)
+            {
+                OpenForm(ordersForm, sender);
+                ordersForm.ShowOrders(customer.Id);
+            }
+            else
+                OpenForm(emptyOrder, this);
+
             button3.BackColor = Color.FromArgb(157, 178, 191);
         }
 
@@ -180,16 +217,10 @@ namespace BookStore.User.Forms
             OpenForm(SearchForm, sender);
         }
 
+        #endregion
 
-        public void UpdateProfilePicture(string profilePicPath)
-        {
-            pictureBox1.BackgroundImage = Image.FromFile(Path.GetFullPath($"..\\..\\..\\Images\\{profilePicPath}"));
-            if (!profilePicPath.Equals("profilePicture.png"))
-                pictureBox1.BackColor = Color.Transparent;
-        }
-
-
-
+        #region Rounded Button
+        //Rounded Button
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
             (
@@ -200,6 +231,7 @@ namespace BookStore.User.Forms
                 int nWidthEllipse, // width of ellipse
                 int nHeightEllipse // height of ellipse
             );
+        #endregion
 
     }
 

@@ -20,20 +20,20 @@ namespace BookStore.Infrastructure.Repositories
 
 
 
-        public bool ChangeStatus(OrderStatus status, Order order)
+        public bool ChangeStatus( Order order)
         {
             TimeSpan timeSinceOrder = DateTime.Now - order.OrderedAt;
 
-            // If the current time is within 2 minutes of the order time, set status to "Placed"
-            if (status == OrderStatus.Placed && timeSinceOrder <= TimeSpan.FromMinutes(2))
-            {
-                order.Status = OrderStatus.Placed.ToString();
-                context.SaveChanges();
-                return true;
-            }
+            //// If the current time is within 2 minutes of the order time, set status to "Placed"
+            //if (/*order.Status == OrderStatus.Placed.ToString() &&*/ timeSinceOrder <= TimeSpan.FromMinutes(2))
+            //{
+            //    order.Status = OrderStatus.Placed.ToString();
+            //    context.SaveChanges();
+            //    return true;
+            //}
 
             // If 2 hours have passed, set status to "Confirmed"
-            if (status == OrderStatus.Placed && timeSinceOrder >= TimeSpan.FromHours(2))
+            if (order.Status == OrderStatus.Placed.ToString() && timeSinceOrder >= TimeSpan.FromHours(2))
             {
                 order.Status = OrderStatus.Confirm.ToString();
                 context.SaveChanges();
@@ -42,40 +42,42 @@ namespace BookStore.Infrastructure.Repositories
             }
 
             // If 1 day has passed, set status to "Shipped"
-            if (status == OrderStatus.Confirm && timeSinceOrder >= TimeSpan.FromDays(1))
+            if (order.Status == OrderStatus.Confirm.ToString() &&timeSinceOrder >= TimeSpan.FromDays(1))
             {
                 order.Status = OrderStatus.Shipped.ToString();
+
                 context.SaveChanges();
 
                 return true;
             }
 
             // If 2 days have passed, set status to "Delivered"
-            if (status == OrderStatus.Shipped && timeSinceOrder >= TimeSpan.FromDays(2))
+            if (order.Status == OrderStatus.Shipped.ToString() && timeSinceOrder >= TimeSpan.FromDays(2))
             {
                 order.Status = OrderStatus.Delivered.ToString();
+                order.ArrivedOn = DateTime.Now;
                 context.SaveChanges();
 
                 return true;
             }
 
-            // If the order is canceled, set status to "Canceled"
-            if (status == OrderStatus.Canceled)
-            {
-                order.Status = OrderStatus.Canceled.ToString();
-                context.SaveChanges();
+            //// If the order is canceled, set status to "Canceled"
+            //if (order.Status == OrderStatus.Canceled.ToString())
+            //{
+            //    order.Status = OrderStatus.Canceled.ToString();
+            //    context.SaveChanges();
 
-                return true;
-            }
+            //    return true;
+            //}
 
-            // If the order is returned, set status to "Returned"
-            if (status == OrderStatus.Return)
-            {
-                order.Status = OrderStatus.Return.ToString();
-                context.SaveChanges();
+            //// If the order is returned, set status to "Returned"
+            //if (order.Status == OrderStatus.Return.ToString())
+            //{
+            //    order.Status = OrderStatus.Return.ToString();
+            //    context.SaveChanges();
 
-                return true;
-            }
+            //    return true;
+            //}
             
             return false; 
         }

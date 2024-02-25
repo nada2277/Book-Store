@@ -1,11 +1,5 @@
 ﻿using BookStore.Application.Contracts;
 using BookStore.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookStore.Application.Services
 {
@@ -35,8 +29,9 @@ namespace BookStore.Application.Services
         }
 
 
-        public bool DeleteBook(Book book)
+        public bool DeleteBook(int bookId)
         {
+            Book book=GetBookById(bookId);
             bool isDeleted = _BookRepository.Delete(book);
             if (isDeleted)
                 _BookRepository.Save();
@@ -44,7 +39,13 @@ namespace BookStore.Application.Services
         }
         public bool UpdateBook(Book book)
         {
-            bool isUpdated = _BookRepository.Update(book);
+            Book updBook= GetBookById(book.Id);
+            updBook.Name = book.Name;
+            updBook.Price = book.Price;
+            updBook.Description = book.Description;
+            updBook.BookImg = book.BookImg;
+            updBook.Stock = book.Stock;
+            bool isUpdated = _BookRepository.Update(updBook);
             if (isUpdated)
                 _BookRepository.Save();
             return isUpdated;

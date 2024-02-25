@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookStore.Context.Migrations
 {
     [DbContext(typeof(BookStoreContext))]
-    [Migration("20240213140441_Mig2")]
-    partial class Mig2
+    [Migration("20240225171010_mig2")]
+    partial class mig2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,6 +32,10 @@ namespace BookStore.Context.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BookImg")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -187,7 +191,7 @@ namespace BookStore.Context.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ArrivedOn")
+                    b.Property<DateTime?>("ArrivedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("CustomerID")

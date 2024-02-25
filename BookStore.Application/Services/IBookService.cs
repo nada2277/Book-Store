@@ -1,9 +1,4 @@
 ﻿using BookStore.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookStore.Application.Services
 {
@@ -13,7 +8,7 @@ namespace BookStore.Application.Services
         Book GetBookById(int id);
         bool AddBook(Book book);
         bool UpdateBook(Book book);
-        bool DeleteBook(Book book);
+        bool DeleteBook(int bookId);
         List<Book> GetByCategoryName(string name, int num, int pageIndex);
         List<Book> GetBooksByName(string name, int num, int pageIndex);
 
