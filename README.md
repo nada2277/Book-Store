@@ -1,4 +1,36 @@
 # BookStore
+Bookstore Project Overview
+Welcome to the Bookstore project! This application is built using the Onion Architecture pattern, encompassing Model, Application, Infrastructure, and Presentation layers. Our presentation layer leverages Windows Forms for an intuitive graphical interface.
+Features:
+1.	User and Admin Paths:
+•	Users can register and login. Upon successful login, users are directed to their respective user page.
+•	Admins have access to an admin page where they can execute CRUD operations on customers, carts, books, and Category. They can cancel orders or view them.
+
+2.	User Interface:
+•	Users can browse all available books with comprehensive details. In pagination format.
+•	Search functionality enables users to find books by name, enhancing ease of discovery.
+•	A category page offers users a selection of five predefined categories, displaying related books.
+•	Pagination is implemented to facilitate a manageable display of books.
+3.	Book Management:
+•	Users can add books to their cart with a single click, with added items automatically appearing on the cart page.
+•	At checkout, orders are placed, and their status is updated to "placed". The system automatically updates the order status, for example it will change it to "confirmed" after 2 hours. Order details are accessible on the orders page.
+4.	User Management:
+•	Users can update their information, such as uploading a profile picture or changing their name, via the settings page.
+•	Validation constraints ensure data reliability, enhancing the integrity of user-entered information.
+5.	Security and Authentication:
+•	Users can securely log out using the dedicated logout button, redirecting them to the login page for enhanced security.
+How to Use:
+1.	Clone the repository to your local machine.
+2.	Open the project in Visual Studio.
+3.	Build and run the application.
+4.	Register as a new user or log in with existing credentials.
+5.	Explore the user or admin paths to access the various features.
+Contributing:
+Contributions to enhance and improve the Bookstore project are welcome. Please feel free to fork the repository, make your changes, and submit a pull request.
+Credits:
+This project was developed by Mohamed Saed, Nada Youssef, Solwan Mohamed, Fahd Mohamed, and Ahmed Abd_elgaber.
+For any questions or issues, please open an issue or contact Mohamed Saed. Thank you for your interest in the Bookstore project!
+
 
 ## Home
 
