@@ -25,13 +25,6 @@ Welcome to the Bookstore project! This application is built using the Onion Arch
 ## 5.	Security and Authentication:
 •	Users can securely log out using the dedicated logout button, redirecting them to the login page for enhanced security.
 
-## Contributing:
-Contributions to enhance and improve the Bookstore project are welcome. Please feel free to fork the repository, make your changes, and submit a pull request.
-Credits:
-This project was developed by Mohamed Saed, Nada Youssef, Solwan Mohamed, Fahd Mohamed, and Ahmed Abd_elgaber.
-For any questions or issues, please open an issue or contact Mohamed Saed. Thank you for your interest in the Bookstore project!
-
-
 ## Images:
 
 ## Home
@@ -74,6 +67,12 @@ For any questions or issues, please open an issue or contact Mohamed Saed. Thank
 
 ![AdminOrder](https://github.com/Mohammed-Said/VisualProject/assets/40707481/d3b08991-8da7-4650-b61a-4406cd1aa200)
 
+
+## Contributing:
+Contributions to enhance and improve the Bookstore project are welcome. Please feel free to fork the repository, make your changes, and submit a pull request.
+Credits:
+This project was developed by Mohamed Saed, Nada Youssef, Solwan Mohamed, Fahd Mohamed, and Ahmed Abd_elgaber.
+For any questions or issues, please open an issue or contact Mohamed Saed. Thank you for your interest in the Bookstore project!
 
 
 
